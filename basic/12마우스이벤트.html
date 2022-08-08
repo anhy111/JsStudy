@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+<style>
+    #id_disp{
+        width: 80%;
+        height: 70vh;
+        border: 1px solid black;
+    }
+</style>
+</head>
+<body>
+    <h1>마우스 이벤트</h1>
+    <div id="id_disp" onmousedown="f_down()" 
+           onmouseup="f_up()" oncontextmenu="f_context()"></div>
+
+<script>
+    var v_disp = document.querySelector('#id_disp');
+    function f_down(){
+        // alert(event.button);    // 어느 버튼을 눌럿는지 0,1,2
+        // alert(event.which);        // 위 버튼보다 +1 값    1,2,3
+        if(event.button == 0){
+            v_disp.innerHTML = "<h1>왼쪽 버튼</h1>";
+            return;
+        }
+        if(event.button == 1){
+            v_disp.innerHTML = "<h1>가운데 버튼</h1>";
+            return;
+        }
+        if(event.button == 2){
+            v_disp.innerHTML = "<h1>훔쳐가지 마라</h1>";
+            return;
+        }
+    }
+
+    function f_up(){
+        v_disp.innerHTML = "<h1>안보이지</h1>";
+    }
+
+    function f_context(){
+        v_disp.addEventListener("contextmenu",function(){
+            event.preventDefault(); // 원래 장착된 기능 막기
+        })
+    }
+</script>
+</body>
+</html>

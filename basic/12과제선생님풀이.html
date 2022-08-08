@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+   <meta charset="UTF-8" />
+   <title>Document</title>
+</head>
+<body>
+   <select id="id_gugu" onchange="f_gugu()">
+      <option value="2">2단</option>
+      <option value="3">3단</option>
+      <option value="4">4단</option>
+      <option value="5">5단</option>
+      <option value="6">6단</option>
+      <option value="7">7단</option>
+      <option value="8">8단</option>
+      <option value="9">9단</option>
+   </select>
+   <input type="button" value="구구단 전부 출력" onclick="f_gugudan()" />
+   <hr />
+   <div id="id_disp"></div>
+<script>
+   var v_gugu = document.querySelector("#id_gugu");
+   var v_disp = document.querySelector("#id_disp");
+
+   function f_gugu() {
+      var v_dan = v_gugu.value; //선택된 값 가져옴
+      alert("선택한 단은 " + v_dan + "단");
+      // table은 태그가 많아서, createElement 대신 문자열 더하기를 많이 사용
+      var v_tblStr = "<table border = 1>";
+      v_tblStr += "<tr><th>" + v_dan + "단</th></tr>";
+      for (var i = 1; i <= 9; i++) {
+         v_tblStr += "<tr>";
+         v_tblStr += "<td>" + v_dan + "*" + i + "=" + v_dan * i + "</td>";
+         v_tblStr += "</tr>";
+      }
+
+      v_tblStr += "</table>";
+      v_disp.innerHTML = v_tblStr; //화면에 출력
+   }
+
+
+   // 내꺼 풀이
+   // function f_gugudan() {
+   //    var v_tblStr = "<table border = 1>";
+   //    v_tblStr += "<tr>";
+   //    for (var i = 2; i <= 9; i++) {
+   //       v_tblStr += "<th>" + i + "단</th>";
+   //    }
+   //    v_tblStr += "</tr>";
+
+   //    for (var i = 1; i <= 9; i++) {
+   //       v_tblStr += "<tr>";
+   //       for (var j = 2; j <= 9; j++) {
+   //          v_tblStr += "<td>";
+   //          v_tblStr += j + "*" + i + "=" + j * i;
+   //          v_tblStr += "</td>";
+   //       }
+   //       v_tblStr += "</tr>";
+   //    }
+
+   //    v_disp.innerHTML = v_tblStr;
+   // }
+
+   //선생님 풀이
+   function f_gugudan(){
+
+      // 되도록 태그 생성 문자열 더하기는 변수를 이용해서
+      // 원하는 문자열을 완성한 후 한번에 innerHTML 속성에 넣어준다.
+      // v_disp.innerHTML = "";
+      // v_disp.innerHTML = "<table border=3>";
+      // v_disp.innerHTML = "<tr><td>흥</td></tr>";
+      // v_disp.innerHTML = "</table>";
+
+      var v_tblStr = "<table width=400 border = 1>";  // 브라우저가 테이블을 자동으로 닫아버림
+                                                      // 그래서 문자열로 테이블을 완성형태로 넣음.
+      v_tblStr += "<tr>";
+      for(var i=2; i<=9; i++){
+         v_tblStr += "<th>" + i + "단</th>";
+      }
+      v_tblStr += "</tr>";
+      for(var i=1; i<=9; i++){
+         v_tblStr += "<tr>";
+         for(var j=2; j<=9; j++){
+            v_tblStr += "<td>" + j + "*" + i + "=" + (i*j) + "</td>";
+         }
+         v_tblStr += "</tr>";
+      }
+      v_tblStr += "</table>";
+      v_disp.innerHTML = v_tblStr;
+   }
+</script>
+</body>
+</html>

@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+<style>
+    #merong{
+        position: absolute;
+        display: inline-block;
+        width: 50px;
+        height: 50px;
+        background-image: url(./images/리트리버3.jpg);
+        background-size: 50px 50px;
+    }
+
+    
+</style>
+</head>
+<body>
+    <div id="merong" onmousedown="f_fix()" onmouseup="f_unfix()"></div>
+<script>
+    // 마우스 클릭하는 동안 움직이면 따라감
+    var v_merong = document.querySelector("#merong");
+    if(!v_merong.style.left){
+        v_merong.style.left = "0px";
+        v_merong.style.top = "0px";
+    }
+
+    var v_eventCheck = false;
+    var v_width;
+    var v_height;
+
+    function move(){
+        v_merong.style.left = event.clientX - v_width + "px";
+        v_merong.style.top = event.clientY - v_height + "px";
+    }
+
+    function f_fix(){
+            v_width = event.clientX - parseInt(v_merong.style.left);
+            v_height = event.clientY - parseInt(v_merong.style.top);
+            window.addEventListener("mousemove", move);
+    }
+    function f_unfix(){
+            window.removeEventListener("mousemove", move);
+    }
+
+
+</script>
+</body>
+</html>

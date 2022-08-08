@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+<style>
+    #id_disp{
+        width: 100%;
+        height: 80vh;
+        border: 1px solid black;
+    }
+
+    .nemo{
+        display: inline-block;
+        text-align: center; /* 가운데 정렬 */
+        font-size: 1.2em;   /* 글자사이즈 1.2배*/
+        line-height: 25px;  /* 글자 높이 */
+        width: 20px;
+        height: 20px;
+        border: 1px solid blue;
+    }
+</style>
+</head>
+<body>
+<input type="button" value="삼각형1" onclick="f_sample()">
+<input type="button" value="삼각형2" onclick="f_sample2()">
+<input type="button" value="삼각형3" onclick="f_sample3()">
+<input type="button" value="삼각형4" onclick="f_sample4()">
+<input type="button" value="피라미드" onclick="f_piramid()">
+<div id="id_disp"></div>    
+<script>
+    var v_disp = document.querySelector('#id_disp');
+    function f_nemo(p_char){
+        var v_nemo = document.createElement("div");
+        v_nemo.setAttribute("class", "nemo");
+        if(!p_char){    //빈 공백이 왔을 때 테두리가 하얀색 네모 리턴
+            v_nemo.style.border = "1px solid white";
+        }
+        v_nemo.innerHTML = p_char;
+        return v_nemo;
+    }
+
+    function f_sample(){
+        v_disp.innerHTML = "";
+        for(var i=1; i<=9; i++){
+            for(var j=1; j<=i; j++){
+                v_disp.appendChild(f_nemo("*"));
+            }
+            v_disp.innerHTML += "<br>"; // 줄바꿈 처리
+        }
+        setTimeout(f_sample2,20);
+    }
+    
+    function f_sample2(){
+        v_disp.innerHTML = "";
+        for(var i=1; i<=9; i++){
+            
+            for(var k=9;k>i; k--){
+                v_disp.appendChild(f_nemo(""));
+            }
+            for(var j=1; j<=i; j++){
+                v_disp.appendChild(f_nemo("*"));
+            }
+            v_disp.innerHTML += "<br>"; // 줄바꿈 처리
+        }
+        
+        setTimeout(f_sample3,20);
+    }
+
+    function f_sample3(){
+        v_disp.innerHTML = "";
+        for(var i=1; i<=9; i++){
+            
+            for(var k=1;k<i; k++){
+                v_disp.appendChild(f_nemo(""));
+            }
+            for(var j=9; j>=i; j--){
+                v_disp.appendChild(f_nemo("*"));
+            }
+            v_disp.innerHTML += "<br>"; // 줄바꿈 처리
+        }
+        
+        setTimeout(f_sample4,20);
+    }
+
+    function f_sample4(){
+        v_disp.innerHTML = "";
+        for(var i=9; i>=1; i--){
+            
+            for(var j=1; j<=i; j++){
+                v_disp.appendChild(f_nemo("*"));
+            }
+            v_disp.innerHTML += "<br>"; // 줄바꿈 처리
+        }
+        
+        setTimeout(f_sample,20);
+    }
+
+    function f_piramid(){
+        v_disp.innerHTML = "";
+        v_maxLine = 9;
+        for(var i=1; i<=v_maxLine; i++){
+            for(var j=9; j>i; j--){
+                v_disp.appendChild(f_nemo(""));
+            }
+            for(var p=1; p<=i*2-1; p++){
+                v_disp.appendChild(f_nemo("*"));
+            }
+            v_disp.innerHTML += "<br>"; // 줄바꿈 처리
+        }
+    }
+    
+    // v_disp.appendChild(f_nemo("*"));    // *들어간 네모
+    // v_disp.appendChild(f_nemo(""));     // 공백 네모
+
+</script>
+</body>
+</html>
