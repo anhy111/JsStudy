@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+<style>
+    #id_files{
+        position: relative;
+        left: 30px;
+        top: 30px;
+        width: 300px;
+        height: 300px;
+        border: 3px solid aquamarine;
+    }
+</style>
+</head>
+<body>
+    <ol id="id_flist">    <!-- ordered list (인덱스 있음) 1,2,3-->
+                            <!-- unorderd list(인덱스 없음) . . .-->
+    </ol>
+    <div id="id_files" ondragover="f_dover()" ondrop="f_drop()">
+        파일 주세요
+    </div>
+<script>
+    // dragover,drop 두 이벤트를 막아야만 브라우져가 자동으로 파일 여는걸
+    // 막을 수 있음
+    var v_drop = document.querySelector("#id_files");
+    var v_fileList = document.querySelector("#id_flist");
+    function f_dover(){
+    }
+
+    function f_drop(){
+
+        var v_files = event.dataTransfer.files;
+        if(v_files.length >= 6){
+            alert("5개까지만 가능합니다.");
+            return;
+        }
+        v_drop.innerHTML = "";
+        v_fileList.innerHTML = "";
+        for(var i=0; i<v_files.length; i++){
+            f_multiple(v_files[i]);
+        }
+
+    }
+
+    function f_multiple(p_file){
+        console.log("파일객체:",p_file.name);
+
+        var v_fileReader = new FileReader();
+        v_fileReader.onload = function(){   // 다읽으면 자동 이벤트 발생
+            var v_img = document.createElement("img");
+            v_img.src = v_fileReader.result;    //읽은 내용을 result속성이 갖고있음
+            v_img.width = 100;
+            v_img.height = 100;
+            v_drop.appendChild(v_img); //이걸해야 보임
+
+            var v_li = document.createElement("li");
+            v_li.innerHTML = p_file.name;
+            v_fileList.appendChild(v_li);
+
+        }
+        v_fileReader.readAsDataURL(p_file);
+    }
+
+    //어쩔수 없이 주변도 막아야함
+    window.addEventListener("dragover", function(){
+        // stopPropagation()은 부모의 이벤트 상속을 막는것
+        // event.stopPropagation();
+        // event.preventDefault()는 브라우저 기본기능 막기
+        event.preventDefault();
+    });
+    window.addEventListener("drop",function(){
+        event.preventDefault();
+    });
+</script>
+</body>
+</html>

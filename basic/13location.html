@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+</head>
+<body>
+    <!-- window.location 객체는 브라우져의 주소 표시줄느낌
+        보통 window는 생략하고 사용, document객체 속성으로도 존재
+        window.location을 사용하는 경우가 99.9%-->
+    <a href="http://daum.net" onclick="f_ano()">다음</a>
+    <input type="button" value="다음으로" onclick="f_daum()">
+    <input type="button" value="페이지 리로드" onclick="f_reload()">
+<script>
+    console.log("페이지가 새로 로딩 될 때 마다 뜸.");
+    function f_reload(){
+        // alert(location.href);
+        // reload는 특별한 상황이 아니면 권장되지 않는 메서드
+        // location.reload();  // f5랑 같은 효과
+        // replace가 권장되는 메서드
+        location.replace(location.href);  
+
+        /* 
+            href vs replace
+            href는 브라우저가 캐쉬한 파일을 보여 줄 수도, 서버에
+            새로 요청할 수도 있음
+
+            replace는 항상 서버에 새로 요청
+        */
+    }
+    function f_ano(){
+        event.preventDefault();
+        location.href = "http://naver.com";
+    }
+
+    function f_daum(){
+        location.href = "http://daum.net";
+    }
+    
+</script>
+</body>
+</html>

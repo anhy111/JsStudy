@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+</head>
+<body>
+<!-- frameset, frame은 내팽겨졌지만, iframe은 아님
+    마이크로소프트가 IE에 처음 적용, 그 뒤 표준이 됨-->
+<h1>html페이지 안에 html페이지를 넣을 수 있음</h1>
+<input type="button" value="눌러바" onclick="f_check()">
+<input type="button" value="눌러22" onclick="f_check2()">
+<iframe id="id_frm" src="./9overflow.html" width="800" height="800" frameborder="2"></iframe>
+<script>
+    var v_iframe = document.querySelector("#id_frm");
+    function f_check(){
+        v_iframe.src = "./8유투브넣기.html";
+    }
+    function f_check2(){
+        console.log(v_iframe.contentWindow);
+        console.log(v_iframe.contentDocument);
+        // iframe안의 dom객체 접근
+        var v_ifrmDoc = v_iframe.contentDocument;
+        v_ifrmDoc.querySelector("h1").innerHTML = "바뀜?";
+
+        var v_childs = v_ifrmDoc.querySelector("#id_parent").children;
+        for(var i=0; i<v_childs.length; i++){
+            alert(v_childs[i].innerHTML);
+            
+        }
+    }
+</script>
+</body>
+</html>

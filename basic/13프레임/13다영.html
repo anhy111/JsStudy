@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+</head>
+<body>
+    <h1>다영짱</h1>
+    <input type="text" id="id_dayoung" value="짜잔">
+<script>
+    var v_dayoung = document.querySelector("#id_dayoung");
+
+
+    var v_txt;
+    setTimeout(() => {
+        v_txt = 
+        window.parent.frames[1].document.querySelector("#id_dong");
+        console.log("check:",v_txt);
+        v_txt.onkeydown = function(){
+            v_dayoung.value = v_txt.value;
+        }
+    }, 500);
+</script>
+</body>
+</html>
