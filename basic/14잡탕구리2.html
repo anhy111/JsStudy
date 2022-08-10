@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+<style>
+    #wrapper{
+        width: 200px;
+        height: 200px;
+        border: 3px solid pink;
+    }
+</style>
+</head>
+<body>
+    <table border="1">
+        <tbody>
+            <tr>
+                <td>이름<input type="text" tabindex="1" value=""></td>
+                <td>별명<input type="text" tabindex="4" value=""></td>
+            </tr>
+            <tr>
+                <!-- -1은 focus를 주지 않음-->
+                <td>나이<input type="text" tabindex="-1" value=""></td>
+                <td>주소<input type="text" tabindex="5" value=""></td>
+            </tr>
+            <tr>
+                <!-- 기본으로 포커스가 들어감-->
+                <td>노인<input type="text" tabindex="3" autofocus title="노발대발" value=""></td>
+                <td>젊음<input type="text" tabindex="6" value=""></td>
+            </tr>
+        </tbody>
+    </table>
+
+    <!-- focus를 받을 수 없는 element에 focus를 받게 함-->
+    <div id="wrapper" tabindex="0" contenteditable onkeydown="f_keyDown()">
+        전 편집이 안되요
+    </div>
+<script>
+    function f_keyDown(){
+        alert(event.keyCode + " : " + event.key );
+    }
+</script>
+</body>
+</html>

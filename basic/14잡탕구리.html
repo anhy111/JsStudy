@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+</head>
+<body>
+<script>
+    // == vs ===    약한 비교 vs 강한 비교
+
+    if([] == []){       // 객체는 값이 같아도 주소가 다름
+        console.log("배열 ==비교");
+    }
+
+    if([] === []){      // 주소가 다름
+        console.log("배열 ===비교");
+    }
+
+    if("123" == 123){   // loose compare(약한비교, 형변환 발생)
+        console.log("?");
+    }
+
+    if("123" === 123){  // strict compare(강한비교, 형변환 X)
+        console.log("???");
+    }
+
+
+</script>
+</body>
+</html>

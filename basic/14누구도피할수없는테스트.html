@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+</head>
+<body>
+    <h1>엄청중요</h1>
+    <div id="id_disp"></div>
+<script>
+
+    var grades = {
+        "ys001":"사장",
+        "ys002":"전무",
+        "ys003":"수석개발자",
+        "ys007":"천재개발자",
+        "ys000":"미확인"
+    };
+    
+    var sawons = [
+        {
+            name:"김효정",
+            grade:"ys001"
+        },
+        {
+            name:"윤다영",
+            grade:"ys007"
+        },
+        {
+            name:"이동민",
+            grade:"ys000"
+        },
+        {
+            name:"박관우",
+            grade:"ys000"
+        },
+        {
+            name:"오재경",
+            grade:"ys002"
+        },
+        {
+            name:"김현석",
+            grade:"ys001"
+        },
+        {
+            name:"윤동기",
+            grade:"ys003"
+        }
+    ];
+    // 위 2개의 데이터를 가지고 id_disp에 테이블을 출력해보자
+    v_disp = document.querySelector('#id_disp');
+    var strTbl = "<table border='1'>";
+    strTbl += "<tr>";
+    strTbl += "<th>순번</th>";
+    strTbl += "<th>이름</th>";
+    strTbl += "<th>직책</th>";
+    strTbl += "</tr>";
+    for(var i=0; i<sawons.length; i++){
+        strTbl += "<tr>";
+        strTbl += "<td>"+(i+1)+"</td>";
+        strTbl += "<td>"+sawons[i]["name"]+"</td>";
+        strTbl += "<td>"+ grades[sawons[i]["grade"]] +"</td>";
+        strTbl += "</tr>";
+    }
+    strTbl += "</table>";
+    v_disp.innerHTML = strTbl;
+</script>
+</body>
+</html>

@@ -46,6 +46,14 @@
     var v_postUrl = "?autoplay=1&mute=1";
     var v_index = 0;
     function f_next() {
+        // iframe 내부 접근 테스트
+        var v_ifrmDoc = v_iframe.contentDocument;
+        console.log("ck1: " + v_iframe);
+
+        // 메세지 주목
+        console.log("ck2: " + v_iframe.contentWindow.document);
+        v_ifrmDoc.querySelector("#player").innerHTML="<h1>너 플레이어</h1>";
+
         // iframe의 src 속성에 직접 값을 주기
         v_iframe.src = v_preUrl + v_mvList[++v_index] + v_postUrl;
         if(v_mvList.length-1 == v_index){

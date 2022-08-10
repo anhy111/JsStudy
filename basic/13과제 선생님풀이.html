@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+<style>
+    #merong{
+        position: absolute;
+        width: 100px;
+        height: 100px;
+        background-image: url(./images/고양이1.jpg);
+        background-size: 100px 100px;
+    }
+
+    
+</style>
+</head>
+<body>
+    <div id="merong" onmousedown="f_mdown()" onmouseup="f_mup()" onmousemove="f_mmove()"></div>
+<script>
+    // 마우스 클릭하는 동안 움직이면 따라감
+    var v_merong = document.querySelector("#merong");
+
+    //선생님 풀이
+    var v_nuller = false;   // 입력 상태
+    v_merong.style.left = "10px";
+    v_merong.style.top = "10px";
+    var v_dongLeft, v_dongTop;
+    var v_mouseLeft, v_mouseTop;
+    function f_mdown(){
+        if(!event.button){
+            v_dongLeft = parseInt(v_merong.style.left);
+            v_dongtop = parseInt(v_merong.style.top);
+            v_mouseLeft = event.clientX;
+            v_mouseTop = event.clientY;
+
+            v_nuller = true; 
+        }
+    }
+
+    function f_mup(){
+        v_nuller = false;
+    }
+
+    function f_mmove(){
+        if(v_nuller){
+            var v_mvX = event.clientX - v_mouseLeft;
+            var v_mvY = event.clientY - v_mouseTop;
+
+            v_merong.style.left = v_dongLeft + v_mvX + "px";
+            v_merong.style.top = v_dongTop + v_mvY + "px";
+            console.log("gg");
+        }
+    }
+
+
+
+
+
+    /*  내풀이
+    if(!v_merong.style.left){
+        v_merong.style.left = "0px";
+        v_merong.style.top = "0px";
+    }
+
+    var v_width;
+    var v_height;
+
+    function move(){
+        v_merong.style.left = event.clientX - v_width + "px";
+        v_merong.style.top = event.clientY - v_height + "px";
+    }
+
+    function f_fix(){
+            v_width = event.clientX - parseInt(v_merong.style.left);
+            v_height = event.clientY - parseInt(v_merong.style.top);
+            window.addEventListener("mousemove", move);
+    }
+    function f_unfix(){
+            window.removeEventListener("mousemove", move);
+    }
+    */
+
+</script>
+</body>
+</html>

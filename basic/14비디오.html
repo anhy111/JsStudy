@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+</head>
+<body>
+    <h1>내일 휴가</h1>
+    <h1>부족하면 reference참고해서 필요한 것 쓰기</h1>
+    <video id="my_mv" src="./video/js1.mp4" width="400" autoplay muted controls controlslist="nodownload">
+        <track src="14sample-en.vtt" kind="subtitles" srclang="en" label="English"></track>
+        <track src="14sample-ko.vtt" kind="subtitles" srclang="ko" label="한국어" default></track>
+    </video>
+    <div>
+        <h4>비디오 컨트롤 막대</h4>
+        <button onclick="f_pause()">포즈</button>
+        <button onclick="f_play()">플레이</button>
+        <button onclick="f_quick()">빠른플레이</button>
+        <button onclick="f_next()">다음</button>
+    </div>
+    <input type="button" value="눌러~" onclick="f_click()">
+<script>
+    var v_video = document.querySelector("#my_mv");
+    var v_index = 1;
+
+    function f_next(){
+        v_video.src = "./video/js" + ++v_index + ".mp4";
+    }
+
+    function f_pause(){
+        v_video.pause();
+    }
+
+    function f_play(){
+        v_video.play();
+        v_video.controls = true;
+    }
+
+    function f_quick(){
+        v_video.playbackRate = v_video.playbackRate * 2;
+    }
+
+    v.v_video.onload = function(){
+        v_video.src = "./video/js3.mp4";
+    }
+    
+    function f_click(){
+        v_video.src = "./video/js2.mp4";
+        v_video.muted = true;
+        v_video.autoplay = true;
+        v_video.controls = true;
+    }
+
+</script>
+</body>
+</html>

@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+<style>
+    .aaa{
+        color: pink;
+        background-color: black;
+    }
+</style>
+<link rel="stylesheet" href="./css/test.css">
+<style>
+    .ccc{
+        color: ivory;
+        background-color: blueviolet;
+    }
+    .ddd{
+        font-size: 2em;
+    }
+</style>
+</head>
+<body>
+    <input style="display: block;" type="button" value="눌러~" onclick="f_styleCheck()">
+    <div class="ddd">안녕</div>
+<script>
+    // 사실 이런 정도까지는 front 전문 회사에 가지 않는 이상 사용 안함
+    // 선택자로 검색하는 함수를 만들어서 사용하는 것이 일반적
+    // 참고사항 정도로 부담없이, 프론트 전문회사가도 이미 만들어짐
+    function f_schSel(p_selector){
+        var v_styleSheets = document.styleSheets;
+        for(var i=0; i<v_styleSheets.length; i++){
+            var v_cssRules = v_styleSheets[i].cssRules;
+            for(var j=0; j< v_cssRules.length; j++){
+                if(v_cssRules[j].selectorText == p_selector){
+                    return v_cssRules[j].style;
+                }
+            }
+        }
+    }
+
+    var v_gak=0;
+    function f_styleCheck() {
+        // var v_ss = document.styleSheets[2].cssRules[1];
+        // alert(v_ss.cssText);     //스타일 전부
+        // alert(v_ss.selectorText);    //클래스 이름
+        // alert(v_ss.style.color);    // 클래스 컬러
+        // v_ss.style.fontSize = parseInt(v_ss.style.fontSize) * 2 + "em";
+        f_schSel(".ddd").color = "red";
+        f_schSel(".ddd").backgroundColor = "blue";
+        v_gak += 5;
+        f_schSel(".ddd").transform = "rotate("+v_gak+"deg)";
+        f_schSel(".ddd").fontSize = "10em";
+        f_schSel(".ddd").display = "inline-block";
+        setTimeout(f_styleCheck,5);
+    }
+</script>
+</body>
+</html>
