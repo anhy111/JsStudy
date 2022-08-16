@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<meta charset="UTF-8">
+<script>
+// json 유틸 객체 <-> 문자열
+// JSON의 불친절한 부분 우선순위에 밀려 버전업안해줌
+// 현 상태에서 해결책 => 바깥쪽은 '로 안쪽은 "로 묶어줘야함
+//'{"name":"김효정","bestFriend":"윤다영"}'
+
+var v_arrStr = '["김태훈","안하용",100]';
+var v_arrObj = JSON.parse(v_arrStr);
+
+console.log(v_arrObj[2]);
+console.log(v_arrObj[2]);
+
+/*
+var v_hjStr = '{"name":"김효정","bestFriend":"윤다영","bestEnemy":"이동민"}';
+v_hjStr = JSON.parse(v_hjStr);
+console.log(v_hjStr);
+*/
+
+var v_jung = {
+    name : "정",
+    corona:"확진"
+}
+
+console.log(v_jung);
+// 객체 배열
+
+// 객체(배열포함)를 문자열로 변환
+var v_str = JSON.stringify(v_jung); // 자바에선 Serialize
+console.log("체크:" + v_str);
+alert("타입확인:"+typeof(v_str));
+
+var v_againObj = JSON.parse(v_str); //문자열을 객체로
+// 단 문자열의 표현이 정확히 객체 표현 문법에 어긋남이 없어야 함.
+console.log("비긴어게인:",v_againObj);
+
+// function jsonParse(p_str){
+//     for(var i=0; i<p_str.length; i++){
+        
+//     }
+//     return p_str;
+// }
+</script>

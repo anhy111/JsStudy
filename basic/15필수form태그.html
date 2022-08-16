@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+</head>
+<body>
+<!-- 서버로 값을 전송할 때 꼭 필요, 둘러싸야 함
+    form안의 사용자 입력태그는 꼭 name 속성을 가져야한다.
+    name 속성이 없는 사용자 입력태그는 값이 전달 되지 않는다.
+    단 AJAX(아작스, 혹은 에이작스라고 읽음) 사용할 때는 제외
+    n_name=dayoung&n_alias=sunshine
+    n_name=idm&n_alias=bestEnemy&n_skills=on&n_skills=on
+    queryString 이라고 부름, 형식은 name=value&name=value&...
+
+    form 태그는 한 페이지내에 몇번이 와도 상관없음
+    단 form태그안에 form 태그를 넣진 않는다.(자주하는 실수)
+    form을 중복해서 넣으면 동작 안됨.
+
+    method는 전송방법을 정의
+    get : 주소표시줄에 넘어가는 값을 표시, 개발자가 디버깅시 편함(default)
+    post : 주소표시줄에 넘어가는 값이 표시 안됨, 서버사이드 프로그램
+            쪽에서 값을 찍어 봐야 하기 때문에 디버깅에 시간이 필요
+            적어도 상대적으로 get보다는 보안상 유리(넘기는 값 안보임)
+    
+    action의 default 값은 페이지 자기 자신
+    실제 action값은 서버사이드 프로그래밍 페이지
+-->
+    <form action="" method="get">
+        이름<input type="text" name="n_name" required><br>
+        별명<input type="text" name="n_alias" required><br>
+        <!-- 단순 화면꾸미는 태그는 없어도 관계없음-->
+        <img src="./images/고양이4.jpg"><br>
+        JS<input type="checkbox" name="n_skills" vlaue="js">
+        HTML<input type="checkbox" name="n_skills" vlaue="html">
+        CSS<input type="checkbox" name="n_skills" vlaue="css"><br>
+        <input type="submit" value="전송"> <!-- 전송 버튼 -->
+        <input type="reset" value="원래대로">
+    </form>
+
+    <form action="">
+        이름<input type="text" name="n_name" id=""><br>
+        별명<input type="text" name="n_alias" id=""><br>
+        <!-- 단순 화면꾸미는 태그는 없어도 관계없음-->
+        <img src="./images/고양이4.jpg"><br>
+        JS<input type="checkbox" name="n_skills" vlaue="js">
+        HTML<input type="checkbox" name="n_skills" vlaue="html">
+        CSS<input type="checkbox" name="n_skills" vlaue="css"><br>
+        <input type="submit" value="전송"> <!-- 전송 버튼 -->
+    </form>
+</body>
+</html>
