@@ -17,9 +17,9 @@
     var v_tblName = "gesiTB";
 
     // 넘어온 값들을 통째로 1개로 묶어서 저장하고 픔
-    var v_arrTotal = [];
-    if(localStorage.getItem(v_tblName) != null){
-        v_arrTotal = JSON.parse(localStorage.getItem(v_tblName));
+    var v_arrTotal = JSON.parse(localStorage.getItem(v_tblName));
+    if(v_arrTotal == null){
+        v_arrTotal = [];
     }
     var v_gul = {};     // 묶어주기 위한 빈 객체(name-space로 봐도 무방) 
     v_gul.title = v_title;
