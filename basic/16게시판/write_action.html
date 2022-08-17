@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<meta charset="UTF-8">
+<!--이 페이지는 사용자에게 보여지는 내용은 없음
+    지금부터 하는 내용은 사기에 가까움
+-->
+<script src="./gesilib.js"></script>
+<script>
+
+    
+    var v_title = request.getParameter("nm_title");
+    var v_writer = request.getParameter("nm_writer");
+    var v_level = request.getParameter("nm_level");
+    var v_cats = request.getParameterValues("nm_cat");
+    var v_content = request.getParameter("nm_content").replaceAll("+"," ");
+
+    //localStorage에 저장하기
+    var v_tblName = "gesiTB";
+
+    // 넘어온 값들을 통째로 1개로 묶어서 저장하고 픔
+    var v_arrTotal = [];
+    if(localStorage.getItem(v_tblName) != null){
+        v_arrTotal = JSON.parse(localStorage.getItem(v_tblName));
+    }
+    var v_gul = {};     // 묶어주기 위한 빈 객체(name-space로 봐도 무방) 
+    v_gul.title = v_title;
+    v_gul.writer = v_writer;
+    v_gul.level = v_level;
+    v_gul.cats = v_cats;
+    v_gul.content = v_content;
+    v_arrTotal.push(v_gul); //v_gul 객체를 v_arrTotal 배열에 담음
+
+    localStorage.setItem(v_tblName,JSON.stringify(v_arrTotal));
+
+    // 오늘과제 수단과 방법을 가리지 말고(애자일기법)
+    // 쓰는 글들이 기존 배열에 추가되어 localStorage저장되도록 한다.
+
+</script>

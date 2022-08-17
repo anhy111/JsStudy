@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+</head>
+<body>
+    <h1>form전송 제어</h1>
+    <form id="id_form1" action="16일단확인.html" method="get">
+        아이디 <input type="text" name="n_id" value="blackpink" required><br>
+        암호 <input type="password" name="n_pw" value="comeback" required><br>
+        <input type="submit" value="전송">
+    </form>
+<script>
+    var v_form = document.querySelector("#id_form1");
+    v_form.addEventListener("submit",function(){
+        event.preventDefault();     // form태그가 가진 전송기능 막기
+        if(v_form.elements[0].value == "roze"){
+            v_form.submit();    // form태그(객체)의 submit 메서드
+        } else{
+            v_form.reset(); //초기값으로 되돌림
+        }
+    })
+</script>
+</body>
+</html>

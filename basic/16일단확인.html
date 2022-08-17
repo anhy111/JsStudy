@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+</head>
+<body>
+    <!-- 서버 프로그램 잠깐 맛보기 -->
+    <form action="16hanbun.php" id="id_form1">
+        <input type="text" name="aaa" value="화룡정점">
+        <div name="kgb" value="fbi">메롱</div>
+        <input type="text" name="xxx" value="마스코트">
+        <input type="submit" value="전송">
+    </form>
+    <hr>
+    <form action="16hanbun.php" method="post">
+        <input type="text" name="bbb" value="윤민석">
+        <input type="text" name="yyy" value="허지현">
+        <input type="submit" value="전송">
+    </form>
+<script>
+    console.log("action(default)값: "+document.querySelector("#id_form1").action);
+    console.log("method(defalut)값: "+document.querySelector("#id_form1").method);
+    // 조금 옛날식 접근법 -> 지금도 사용됨
+    // elements[i] 는 사용자 입력 태그만 포함
+    console.log(document.forms[0].elements[1].value);
+    console.log(document.forms[1].elements[1].value);
+    // document.forms[0].aaa.vlaue = "마징가Z";
+    // 접근법 2
+    console.log(document.forms[0].aaa.value);
+    console.log(document.forms[1].bbb.value);
+</script>
+</body>
+</html>
