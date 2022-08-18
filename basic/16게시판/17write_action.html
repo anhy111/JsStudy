@@ -3,7 +3,7 @@
 <!--이 페이지는 사용자에게 보여지는 내용은 없음
     지금부터 하는 내용은 사기에 가까움
 -->
-<script src="./gesilib.js"></script>
+<script src="gesilib.js"></script>
 <script>
 
     
@@ -13,25 +13,26 @@
     var v_cats = request.getParameterValues("nm_cat");
     var v_content = request.getParameter("nm_content").replaceAll("+"," ");
 
-    //localStorage에 저장하기
-    var v_tblName = "gesiTB";
+    var v_arrTotal = [];
+    var v_pid = 1;     //없을 때 초기값
 
-    // 넘어온 값들을 통째로 1개로 묶어서 저장하고 픔
-    var v_arrTotal = JSON.parse(localStorage.getItem(v_tblName));
-    if(v_arrTotal == null){
-        v_arrTotal = [];
+    // primary-key(검색을 빠르게 -> 기본키(식별키))
+    if(localStorage.getItem(v_tblName)){
+        v_arrTotal = JSON.parse(localStorage.getItem(v_tblName));
+        v_pid = v_arrTotal[v_arrTotal.length - 1].pid + 1;
     }
-    var v_gul = {};     // 묶어주기 위한 빈 객체(name-space로 봐도 무방) 
+    var v_gul = {};     
+    v_gul.pid = v_pid;
     v_gul.title = v_title;
     v_gul.writer = v_writer;
     v_gul.level = v_level;
     v_gul.cats = v_cats;
     v_gul.content = v_content;
-    v_arrTotal.push(v_gul); //v_gul 객체를 v_arrTotal 배열에 담음
+    v_arrTotal.push(v_gul); 
 
     localStorage.setItem(v_tblName,JSON.stringify(v_arrTotal));
 
-    // 오늘과제 수단과 방법을 가리지 말고(애자일기법)
-    // 쓰는 글들이 기존 배열에 추가되어 localStorage저장되도록 한다.
-
+    // 사용자에게 쓰기 성공했다고 알려줌
+    alert("글이 잘 등록됫다.")
+    location.replace("17list.html");
 </script>

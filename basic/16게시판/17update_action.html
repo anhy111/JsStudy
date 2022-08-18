@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<meta charset="UTF-8">
+<script src="./gesilib.js"></script>
+<script>
+    var v_gnum = request.getParameter('nm_gnum');
+    var v_title = request.getParameter('nm_title');
+    var v_level = request.getParameter('nm_level');
+    var v_content = request.getParameter('nm_content');
+    var v_cats = request.getParameterValues('nm_cat');
+
+    var v_dataArr = JSON.parse(localStorage.getItem(v_tblName));
+    var v_schGul;
+    //글 찾기
+    for(var i=0; i<v_dataArr.length; i++) {
+        if(v_dataArr[i].pid == v_gnum){
+            v_dataArr[i].title = v_title;
+            v_dataArr[i].level = v_level;
+            v_dataArr[i].content = v_content;
+            v_dataArr[i].cats = v_cats;
+            break;
+        }
+    }
+
+    // 메모리상에서 변경한 데이터를 localStorage 다시 써주어야
+    // 실제적으로 Update가 됨.
+    localStorage.setItem(v_tblName,JSON.stringify(v_dataArr));
+    alert("업데이트 성공");
+    location.replace("17list.html");
+
+</script>

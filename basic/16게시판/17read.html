@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+<script src="./gesilib.js"></script>
+</head>
+<body>
+<h1>구멍많은 게시판 읽기</h1>
+<form id="id_rform" action="17update_action.html" method="get">
+    <!-- 굳이 사용자에게 보여 줄 필요 없고 프로그램적으로 필요한 값을
+        폼 안에 숨겨서 보낼 때 사용, 그저 안 보이는 텍스트박스-->
+    <input type="hidden" name="nm_gnum" value="">
+    <table border="1">
+        <tr>
+            <td>글제목</td>
+            <td><input type="text" name="nm_title" required></td>
+        </tr>
+        <tr>
+            <td>글쓴이</td>
+            <!-- readOnly vs disabled -->
+            <!-- readOnly는 서버에 전송가능, disabled는 안됨 -->
+            <td><input type="text" name="nm_writer" value="" disabled></td>
+        </tr>
+        <tr>
+            <td>글쓴이 레벨</td>
+            <td>
+                <select name="nm_level">
+                    <option value="chunjae">천재</option>
+                    <option value="sujae">수재</option>
+                    <option value="youngjae">영재</option>
+                    <option value="roze" selected>로제</option>
+                </select>
+            </td>
+        </tr>
+        <tr>
+            <td>카테고리</td>
+            <td>
+                JS<input type="checkbox" name="nm_cat" value="js">
+                HTML<input type="checkbox" name="nm_cat" value="html">
+                CSS<input type="checkbox" name="nm_cat" value="css">
+                JSP<input type="checkbox" name="nm_cat" value="jsp">
+            </td>
+        </tr>
+        <tr>
+            <td colspan="2">
+                내용<br>
+                <textarea name="nm_content" cols="50" rows="10"></textarea>
+            </td>
+        </tr>
+        <tr>
+            <td colspan="2">
+                <input type="submit" value="수정하기">
+                <input id="id_del" type="button" value="삭제하기">
+            </td>
+        </tr>
+    </table>
+</form>
+<script>
+    var v_form = document.querySelector("#id_rform");
+    var v_delBtn = document.querySelector("#id_del");
+    
+    var v_titleText = v_form.nm_title;
+    var v_writerText = v_form.nm_writer;
+    var v_contentText = v_form.nm_content;
+    var v_levelSelect = v_form.nm_level;
+    var v_catCheckbox = v_form.nm_cat;
+    
+    // 주소표시줄에서 글넘버 잡아오기
+    var v_gnum = request.getParameter("g_num");
+
+    // 번호에 해당하는 글을 localStorage에서 찾아야 함
+    var v_dataArr = JSON.parse(localStorage.getItem(v_tblName));
+    var v_schGul;
+    for(var i=0; i<v_dataArr.length; i++){
+        if(v_dataArr[i].pid == v_gnum){
+            v_schGul = v_dataArr[i];
+            break;
+        }
+    }
+
+    // 찾았으니 해당 값을 화면에 표시
+    v_titleText.value = v_schGul.title;
+    v_writerText.value = v_schGul.writer;
+    v_contentText.value = v_schGul.content;
+    v_levelSelect.value = v_schGul.level; 
+    v_form.nm_gnum.value = v_gnum;
+
+    // select에 value의 값을 주면, option의 같은 value값이 자동으로 선택됨.
+
+
+    v_delBtn.addEventListener("click",f_del);
+    function f_del(){
+        v_form.action="17delete_action.html";
+        v_form.submit();    // 폼 전송
+    }
+
+    // 과제 localStorage에서 읽어온값 체크박스 표시
+    var v_lsCat = v_schGul.cats;
+    
+    for(var i=0; i<v_lsCat.length; i++){
+        for(var j=0; j<v_catCheckbox.length; j++) {
+            if(v_catCheckbox[j].value == v_lsCat[i]){
+                v_catCheckbox[j].checked = true;
+            }
+        }
+    }
+
+</script>
+</body>
+</html>

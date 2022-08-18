@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<meta charset="UTF-8">
+<script src="./gesilib.js"></script>
+<script>
+    // delete는 간단함.
+    var v_gnum = request.getParameter("nm_gnum");
+
+    // localStorage 글 읽어오기
+    var v_dataArr = JSON.parse(localStorage.getItem(v_tblName));
+
+    for(var i=0; i<v_dataArr.length; i++) {
+        if(v_dataArr[i].pid == v_gnum){
+            v_dataArr.splice(i, 1); // i 부터 1개 지움
+            break;
+        }
+    }
+
+    localStorage.setItem(v_tblName, JSON.stringify(v_dataArr));
+    alert("삭제 성공");
+    location.replace("17list.html");
+
+</script>

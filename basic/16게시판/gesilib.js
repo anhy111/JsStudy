@@ -1,3 +1,5 @@
+//게시판 테이블명 잠시 전역으로 선언
+var v_tblName = "gesiTB";
 
 /*  
     인코딩 함수          디코딩 함수
@@ -14,7 +16,7 @@ request.getParameter = function(p_name){  //name을 넘기면 value를 리턴해
     for(var i=0; i<v_nvSsang.length; i++){
         var nv = v_nvSsang[i].split("=");
         if(nv[0] == p_name){
-            return decodeURIComponent(nv[1]);
+            return decodeURIComponent(nv[1]).replaceAll("+"," ");
         }
     }
     return null;    // 못찾으면 null반환
@@ -27,7 +29,7 @@ request.getParameterValues = function (p_name){  //name을 넘기면 value를 �
     for(var i=0; i<v_nvSsang.length; i++){
         var nv = v_nvSsang[i].split("=");
         if(nv[0] == p_name){
-            v_values[v_values.length] = decodeURIComponent(nv[1]);
+            v_values.push(decodeURIComponent(nv[1]).replaceAll("+"," "));
         }
     }
     if(v_values.length == 0){

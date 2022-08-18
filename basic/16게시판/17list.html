@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+<script src="gesilib.js"></script>
+</head>
+<body>
+<h1>구멍많은 게시판 리스트</h1>
+<div id="id_disp"></div><!-- 리스트 출력할 영역 지정-->
+<script>
+    var v_disp = document.querySelector('#id_disp');
+    var v_dataArr = JSON.parse(localStorage.getItem(v_tblName));
+    var v_tblStr = "<table border=2>";
+    v_tblStr += "<tr><th>순번</th><th>제목</th><th>글쓴이</th>";
+    v_tblStr += "<th>카테고리</th><th>레벨</th></tr>"
+    for(var i=0; i<v_dataArr.length; i++){
+        var v_ggul = v_dataArr[i];
+        v_tblStr += "<tr onmouseover='f_over(this)' onmouseout='f_out(this)'>";
+        v_tblStr += "<td>" + (i+1) + "</td>";
+        v_tblStr += "<td><a href=17read.html?g_num=" + v_ggul.pid +">" + v_ggul.title + "</a></td>";
+        v_tblStr += "<td>" + v_ggul.writer + "</td>";
+        v_tblStr += "<td>" + v_ggul.cats + "</td>";
+        v_tblStr += "<td>" + v_ggul.level + "</td>";
+        v_tblStr += "</tr>";
+    }
+    v_tblStr += "</table><br><br>";
+    v_tblStr += "<a href=16write.html>새글쓰기</a>";
+    v_disp.innerHTML = v_tblStr;
+
+    // 마우스 올라간 TR만 배경색이 블랙 글자색이 핑크로 되도록 하시오
+    // mouseover, mouseout
+    var v_trs = document.querySelectorAll("tr");
+    // for(var i=0; i<v_trs.length;i++){
+    //     f_overOut(i);
+    // }
+
+    //tr 1개 이벤트 등록 함수
+    // function f_overOut(p_tr){
+    //     v_trs[p_tr].addEventListener("mouseover",function(){
+    //         v_trs[p_tr].style.backgroundColor = "black";
+    //         v_trs[p_tr].style.color = "pink";
+    //     })
+    //     v_trs[p_tr].addEventListener("mouseout",function(){
+    //         v_trs[p_tr].style.backgroundColor = "white";
+    //         v_trs[p_tr].style.color = "black";
+    //     })
+    // }
+
+    function f_over(p_this){
+        p_this.style.backgroundColor = "black";
+        p_this.style.color = "pink";
+    }
+
+    function f_out(p_this){
+        p_this.style.backgroundColor = "white";
+        p_this.style.color = "black";
+    }
+
+</script>
+</body>
+</html>
