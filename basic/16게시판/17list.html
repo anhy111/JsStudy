@@ -4,17 +4,49 @@
     <meta charset="UTF-8">
     <title>Document</title>
 <script src="gesilib.js"></script>
+<style>
+    .active{    /* 현재 페이지를 표시하기 위한 스타일*/
+        font-size:3em; /* 다섯배*/
+        color: red;
+    }
+</style>
 </head>
 <body>
 <h1>구멍많은 게시판 리스트</h1>
 <div id="id_disp"></div><!-- 리스트 출력할 영역 지정-->
 <script>
+
     var v_disp = document.querySelector('#id_disp');
     var v_dataArr = JSON.parse(localStorage.getItem(v_tblName));
+    
+    
+    /* 페이지를 나누려면 산수가 필요함
+        페이지당 글 수?
+        페이지 번호 ?
+        전체 글 수?
+    */
+    var v_pDsu = 10;    // 페이지당 10개 보여줌
+    var v_pageNum = request.getParameter('pageNum');
+    if(!v_pageNum){
+        v_pageNum = 1;
+    }
+    var v_totalG = v_dataArr.length; 
+    var v_pageCount = Math.ceil(v_totalG/v_pDsu); //나머지 있으면 올림
+    // 페이지 시작, 끝 번호필요
+    // 0~9, 10~19 ...
+    var v_sNum = (v_pageNum - 1) * v_pDsu;  
+    var v_eNum = v_sNum + v_pDsu;
+
+    if(v_eNum > (v_totalG)){
+        v_eNum = v_totalG;  // 강제로 마지막 index 값 세팅
+    }
+
+
+
     var v_tblStr = "<table border=2>";
     v_tblStr += "<tr><th>순번</th><th>제목</th><th>글쓴이</th>";
-    v_tblStr += "<th>카테고리</th><th>레벨</th></tr>"
-    for(var i=0; i<v_dataArr.length; i++){
+    v_tblStr += "<th>카테고리</th><th>레벨</th><th>삭제</th></tr>"
+    for(var i=v_sNum; i<v_eNum; i++){
         var v_ggul = v_dataArr[i];
         v_tblStr += "<tr onmouseover='f_over(this)' onmouseout='f_out(this)'>";
         v_tblStr += "<td>" + (i+1) + "</td>";
@@ -22,11 +54,27 @@
         v_tblStr += "<td>" + v_ggul.writer + "</td>";
         v_tblStr += "<td>" + v_ggul.cats + "</td>";
         v_tblStr += "<td>" + v_ggul.level + "</td>";
+        v_tblStr += "<td><input type=checkbox name='nm_del' value="+ v_ggul.pid+"></td>";
         v_tblStr += "</tr>";
     }
     v_tblStr += "</table><br><br>";
-    v_tblStr += "<a href=16write.html>새글쓰기</a>";
+    
+    // 페이지 넘버 화면에 출력해 보기
+    // 안나오는 11페이지 이유 찾기
+    for(var i=1; i<=v_pageCount; i++){
+        if(i == v_pageNum) {
+            v_tblStr += "<a class=active href='17list.html?pageNum="+i+"'>" + i + "</a>&nbsp&nbsp";
+        } else{
+            v_tblStr += "<a href='17list.html?pageNum="+i+"'>" + i + "</a>&nbsp&nbsp";
+        }
+    }
+
+    v_tblStr += "<hr><a href=16write.html>새글쓰기</a><br><br>";
+    v_tblStr += "<input style='font-size:1.2em' type=button value='선택 항목 삭제' onclick=f_delete()>";
     v_disp.innerHTML = v_tblStr;
+
+
+
 
     // 마우스 올라간 TR만 배경색이 블랙 글자색이 핑크로 되도록 하시오
     // mouseover, mouseout
@@ -55,6 +103,25 @@
     function f_out(p_this){
         p_this.style.backgroundColor = "white";
         p_this.style.color = "black";
+    }
+
+    function f_delete(){
+        var v_arr = document.querySelectorAll("input[name=nm_del]");
+        for(var i=0; i<v_pDsu; i++){
+            if(v_arr[i].checked){
+                request.deleteParameter(v_arr[i].value);
+            }
+        }
+        location.replace("17list.html?pageNum="+v_pageNum);
+
+        // var v_checkedVals = [];
+        // for(var i=0; i<v_arr.length; i++){
+        //     if(v_arr[i].checked){
+        //         v_checkedVals.push(v_arr[i].value);
+        //     }
+        // }
+
+        // for(var i=0; i<v_)
     }
 
 </script>

@@ -37,3 +37,21 @@ request.getParameterValues = function (p_name){  //name을 넘기면 value를 �
     }
     return v_values;    
 }
+
+request.deleteParameter = function(p_pid){
+
+    var v_dataArr = JSON.parse(localStorage.getItem(v_tblName));
+
+    for(var i=0; i<v_dataArr.length; i++) {
+        if(v_dataArr[i].pid == p_pid){
+            v_dataArr.splice(i, 1); // i 부터 1개 지움
+            break;
+        }
+    }
+    localStorage.setItem(v_tblName, JSON.stringify(v_dataArr));
+}
+
+request.aaa = function(){
+    console.log(222);
+    return;
+}

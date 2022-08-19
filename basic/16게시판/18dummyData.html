@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<meta charset="UTF-8">
+<script>
+    // 홈페이지 과제는 뭘 만들어도 됨.
+    // CRUD기능과, 모달기능은 꼭 있어야함.
+    // 핵심은 배운거 한번씩 써보고, 이상한거 질문
+
+    // 페이지 나누기 연습용 더미 데이터 만들기
+    var v_dummyDatas = [];
+    var v_level = ["chunjae","sujae","youngjae","roze"];
+    var v_cats = ["js","css","html","jsp"];
+    function f_ranCat(){
+        var v_cnt = Math.ceil(Math.random()*v_cats.length);
+        var v_rslt = [];
+ label: for(var i=0; i<v_cnt; i++){ // 중복체크 필요
+            var v_ransu = Math.floor(Math.random()*v_cats.length);
+            for(var j=0; j<i; j++){
+                if(v_rslt[j] == v_cats[v_ransu]){
+                    continue label;
+                }
+            }
+            v_rslt.push(v_cats[v_ransu]);
+        }
+        return v_rslt;
+    }
+    for(var i=1; i<=108; i++){
+        var v_gul = {};
+        v_gul.pid = i;
+        v_gul.title = "제목" + i;
+        v_gul.writer = "글쓴이" + i;
+        v_gul.content = "내용" + i + "임";
+        v_gul.level = v_level[Math.floor(Math.random()*v_level.length)];
+        v_gul.cats = f_ranCat();
+        v_dummyDatas.push(v_gul);
+    }
+
+    //배열을 localStorage에 저장
+    localStorage.setItem("gesiTB",JSON.stringify(v_dummyDatas));
+
+</script>
