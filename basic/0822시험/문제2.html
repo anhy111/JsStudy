@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<meta charset="UTF-8">
+<script>
+
+    var v_ranArr = [];
+    for(var i=0; i<20; i++){
+        v_ranArr.push( Math.ceil(Math.random()*20));
+    }
+
+    var v_min=Number.MAX_VALUE;
+    for(var i=0; i<v_ranArr.length; i++){
+        if(v_min > v_ranArr[i]){
+            v_min = v_ranArr[i];
+        }
+    }
+
+    console.log(v_ranArr);
+    console.log(v_min);
+    console.log(f_minArr(v_ranArr));
+
+    function f_minArr(p_arr){
+        var v_min = Number.MAX_VALUE;
+        for(var i=0; i<v_ranArr.length; i++){
+            if(v_min > v_ranArr[i]){
+                v_min = v_ranArr[i];
+            }
+        }
+        return v_min;
+    }
+</script>

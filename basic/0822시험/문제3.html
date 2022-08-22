@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+</head>
+<body>
+    <input type="button" value="display" onclick="f_display()">
+    <input type="button" value="position" onclick="f_position()">
+    <input type="button" value="overflow" onclick="f_overflow()">
+    <input type="button" value="z_index" onclick="f_z_index()">
+    <input type="button" value="transform" onclick="f_transform()">
+    <input type="button" value="css선택자" onclick="f_cssSelector()">
+
+    <div id="id_disp">
+    </div>
+</body>
+<script>
+    // display, position, overflow, z-index, transform 설명
+    // css선택자 설명
+    
+    var v_div = document.querySelector("#id_disp");
+
+    
+    
+    
+    function f_display(){
+        v_div.innerHTML = `<h2>display는 화면제어<br>
+                    block(defalut): 한줄 통째로 차지함,<br>
+                    none : 화면에 안보임<br>
+                    inline-block : 옆에 다른 태그도 존재가능함.
+                     </h2>`
+    }
+
+    function f_position(){
+        v_div.innerHTML = `<h2>position은 태그의 좌표기준을 설정함.<br>
+                    static은 브라우저가 잡아주고 변경 불가<br>
+                    relative는 static으로 잡은 자리가 좌표 (0,0) 상대좌표<br>
+                    absolute는 브라우저 좌측 상단이 (0,0) 절대좌표
+                    다른 태그들의 static에 영향을 미치지 않음 </h2>`
+    }
+
+    function f_overflow(){
+        v_div.innerHTML = `<h2>overflow는 부모 자식간에 적용된다.<br>
+                        부모의 style에서 overflow를 hidden으로 <br>
+                        적용하면 자식이 부모의 크기를 넘어가는 <br>
+                        그림들을 잘라서 보여줌</h2>`;
+    }
+
+    function f_z_index(){
+        v_div.innerHTML = `<h2>z-index는 우리가 브라우저에 보이는 것은<br>
+                        2차원이지만 그 그외에 앞 뒤로 층층이 쌓이는 <br>
+                        태그들이 존재함. 이 층에 대한 앞, 뒤를 누구를<br>
+                        우선으로 보여줄 것인지 설정한다.<br>
+                        숫자가 높을수록 앞으로 이동함.</h2>`;
+    }
+
+    function f_transform(){
+        v_div.innerHTML = `<h2>transform은 좌표공간을 변형함으로써 <br>
+                        일반적인 문서 흐름을 방해하지 않고 콘텐츠의 <br>
+                        형태와 위치 변경 2차원 회전, 3차원(x, y, z)축을<br>
+                        기준으로 회전, 비틀기 등을 할 수 있음.</h2>`;
+    }
+
+    function f_cssSelector(){
+        v_div.innerHTML = `<h2>css선택자란 지정할 웹 페이지의 HTML요소<br>
+                        를 대상으로하는데 사용. 다양한 사용법이 존재함.<br>
+                        하나의 객체, 둘 이상이면 배열로 반환함.<br>
+                        선택가능한 대상으로 태그, id, class, 속성 등</h2>`;
+    }
+
+</script>
+</html>

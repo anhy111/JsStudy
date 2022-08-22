@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<meta charset="UTF-8">
+<script>
+
+    //시간을 매개변수로 받아서 올라간 거리를 리턴
+    function f_retDistance(p_time){
+        var distance=0;
+        for(var i=1; i<=p_time; i++){
+            if(i % 2 == 0){
+                distance += -2;
+                continue;
+            }
+            distance += 3;
+        }
+        return distance+"cm 올라감";
+    }
+    
+    //거리를 매개변수로 받아서, 그 만큼 올라가는데 걸리는 시간 리턴
+    function f_retSeconds(p_dist){
+        var v_seconds = 0;
+        var v_mydist = 0;
+        
+        while(v_mydist != p_dist){
+            v_seconds++;
+            if(v_seconds%2 == 0){
+                v_mydist += -2;
+                continue;
+            }
+            v_mydist += 3;
+        }
+        return v_seconds+"초 걸림";
+    }
+
+    alert(f_retDistance(7));    // 초동안 올라간 거리
+    alert(f_retSeconds(6));    //  cm 올라가는데 걸리는 시간
+</script>

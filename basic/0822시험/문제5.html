@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+<style>
+    #id_circle{
+        width: 98%;
+        height: 98vh;
+        border-radius: 50%;
+        border: 2px solid black;
+        overflow: hidden;
+    }
+
+    .bingle{
+        width: 50%;
+        height: 50%;
+        background-color: pink;
+        transform-origin: bottom right;
+    }
+</style>
+</head>
+<body>
+    <div id="id_circle">
+        <div class="bingle"></div>
+    </div>
+</body>
+<script>
+
+    var v_bingle = document.querySelector('.bingle');
+    var v_circle = document.querySelector('#id_circle');
+    var v_gak = 0;
+
+    function f_bingle(){
+        v_circle.style.width = window.innerWidth * 0.96 + "px";
+        v_circle.style.height = v_circle.style.width;
+        v_gak = (v_gak + 5) % 360;
+        v_bingle.style.transform = "rotate(" + v_gak + "deg)";
+        setTimeout(f_bingle, 80);
+    }
+
+    f_bingle();
+</script>
+</html>
