@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+<style>
+    #wrap{
+        position: relative;
+        width: 100%;
+        height: 98vh;
+    }
+
+    .star{
+        position: absolute;
+        display: inline-block;
+    }
+</style>
+</head>
+<body>
+    <div id="wrap" onmousemove="xyCheck()"></div>
+<script>
+    var my_message = "**** 블랙핑크 로오제~~ ****";
+    var colors = ["black","red","blue","magenta","yellow,","pink","tomato","green"];
+    my_message = my_message.split("");
+    var xpos = [];
+    var ypos = [];
+    var xdist = 40;   // 글자 사이 간격!
+    var x,y;
+    for(var i=0; i< my_message.length; i++){
+        xpos[i] = -100;
+        ypos[i] = -100;
+    }
+
+    var wrapDiv = document.getElementById("wrap");
+    var strDiv;
+    for(var i=0; i< my_message.length; i++){
+        strDiv = "<div id=silver" + i + " class=star >";
+        strDiv += my_message[i] + "</div>";
+        wrapDiv.innerHTML += strDiv;
+    }
+    
+    function xyCheck(){
+        x= event.clientX;
+        y= event.clientY;
+    }
+
+    function mvMouse(){
+        xpos[0] = x + xdist;
+        ypos[0] = y;
+
+
+        // for(var i=0; i< my_message.length; i++){
+        //     xpos[i+1] = xpos[i]+xdist;
+        //     ypos[i+1] = ypos[i];
+        // }
+
+        for(var i=my_message.length-1; i>=1 ; i--){
+            xpos[i] = xpos[i-1]+xdist;
+            ypos[i] = ypos[i-1];
+            console.log("x="+xpos[i]+" y="+ypos[i]);
+        }
+
+        for(var i=0;i<my_message.length; i++){
+            var silver= document.getElementById("silver"+i);
+            silver.style.left = xpos[i]+"px";
+            silver.style.top = ypos[i]+"px";
+            silver.style.color = colors[Math.floor(Math.random()*colors.length)];
+            silver.style.fontSize = Math.floor(Math.random()*3+1) + "em";
+        }
+        setTimeout(mvMouse,40);
+    }
+    window.onload = mvMouse;
+</script>
+</body>
+</html>
