@@ -162,11 +162,33 @@ request.getMember = function(p_id){
     return null;
 }
 
+request.getAllMem = function(){
+    if(this.isEmptyMem()){
+        return null;
+    }
+    return JSON.parse(localStorage.getItem(v_memTbl));
+}
+
 request.isEmptyMem = function(){
     var v_tbl = JSON.parse(localStorage.getItem(v_memTbl));
 
     if(!v_tbl || v_tbl.length == 0){
         return 1;
+    }
+    return 0;
+}
+
+request.ExistsMemName = function(p_name){
+    var v_mems = this.getAllMem();
+
+    if(!v_mems || v_mems.length == 0){
+        return 0;
+    }
+
+    for(var i=0; i<v_mems.length; i++){
+        if(v_mems[i].name == p_name){
+            return 1;
+        }
     }
     return 0;
 }
@@ -216,15 +238,31 @@ request.signupClose = function(){
 request.signup = function(){
     var v_id = document.querySelector("#id_signID");
     var v_pw = document.querySelector("#id_signPW");
+    var v_name = document.querySelector("#id_signName");
 
-    if(!this.getMember(v_id) && !this.isEmptyMem()){
+    if(!v_id.value){ 
+        swal("ID를 입력해주세요.");
+        return;
+    } else if(!v_pw.value){
+        swal("PW를 입력해주세요.");
+        return;
+    } else if(!v_name.value){
+        swal("닉네임을 입력해주세요.");
+        return;
+    }
+
+    if(this.getMember(v_id.value) != null){
         // 멤버 존재
-        swal("중복된 회원이 존재합니다");
+        swal("중복된 id가 존재합니다");
+        return;
+    } else if(this.ExistsMemName(v_name.value)){
+        swal("중복된 닉네임이 존재합니다");
         return;
     }
     v_mem = {};
     v_mem.id = v_id.value;
     v_mem.pw = v_pw.value;
+    v_mem.name = v_name.value;
     this.insertMember(v_mem);
     swal('회원가입 성공','환영합니다.','success')
         .then(function(){
