@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+<script src="./js/function.js"></script>
+<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+</head>
+<body>
+    
+<script>
+    var v_gnum = request.getParameter("g_num");
+    var v_title = request.getParameter("nm_title");
+    var v_writer = request.getParameter("nm_writer");
+    var v_content = request.getParameter("nm_content");
+
+    var v_gul = request.getGul(v_gnum);
+
+    v_gul.title = v_title;
+    v_gul.writer = v_writer;
+    v_gul.content = v_content;
+
+    var v_result = request.updateGul(v_gul);
+    if(v_result){
+        swal('글수정 성공','목록으로 이동합니다.','success')
+        .then(function(){
+            location.replace("main.html");
+        });
+    }else{
+        swal('글수정 실패','알 수 없는 오류','error')
+            .then(function(){
+                location.replace("main.html");
+            });
+    }
+</script>
+</body>
+</html>

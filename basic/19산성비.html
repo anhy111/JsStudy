@@ -17,23 +17,30 @@
         border: 1px solid black; /* 레이아웃 구성할 땐 항상 보이게 */
     }
     #hhh{
+        background-image: url("./images/리트리버3.jpg");
         position: relative;
         width: 100%; /* 부모기준 100% */
         height: 85%;
         border: 1px solid blue;
-
+        overflow: hidden;
     }
     #ggg{
+        background-image: url("./images/리트리버4.jpg");
+        position: relative;
         width: 99%;
         height: 14%;
         border: 3px solid pink;
+        z-index: 999999;
     }
     input{ 
         font-size: 2em;
     }
     .dongmin{
+        color: yellow;
+        background-color: black;
         position: absolute;
         display: inline-block;
+        border: 1px solid red;
     }
 </style>
 </head>
@@ -43,23 +50,79 @@
         </div>
         <div id="ggg">
             <br>
-            <input type="text" id="" value="" size="10">
-            <input type="button" id="id_start" value="시작">
+            <input type="text" id="hyojung" value="" size="10">
+            <input type="button" id="id_start" value="시작">&nbsp&nbsp
+            <input type="button" id="id_start" value="멈춤">
         </div>
     </div>
 <script>
+    // 마지막 과제, 시작 버튼 눌러도 안 빨라지게
+    //              멈춤 버튼 누르면 멈추게
+
+    var v_fallingCancle;
+    var v_ranSelCancle;
+
+    var v_hyojung = document.querySelector("#hyojung");
+    function f_enter(){
+        if(event.keyCode == 13){
+            //엔터키 쳤을 때 초리
+            for(var i=0; i<v_dongArr.length; i++){
+                if(v_dongArr[i].innerHTML == v_hyojung.value){
+                    v_dongArr[i].style.top = "-30px";   //화면 밖으로
+                    v_dongArr.splice(i,1);
+                    break;
+                }
+            }
+            v_hyojung.value="";  // 텍스트박스 값 클리엉
+        }
+    }
+    v_hyojung.onkeydown = f_enter;
+
     var v_hhh = document.querySelector("#hhh");
     var v_start = document.querySelector("#id_start");
 
     var v_ran;
     var v_ranDiv;
-    function f_start(){
-        if(!v_ran){     // 한번만 실행되도록
-            v_ran = Math.floor(Math.random()*v_jsStudy.length);
-            v_ranDiv = document.querySelector("#dayoung"+v_ran);
+    //선택된 글자만 담는 배열 -> 전역변수를 선언하면 두 함수를 이어줄 수 있음
+    var v_dongArr = [];
+
+    // 위에 숨어있는 글자들 중에서 랜덤하게 글자를 선택하는 함수
+    function f_ranSel(){
+        v_ran = Math.floor(Math.random()*v_jsStudy.length);
+        v_ranDiv = document.querySelector("#dayoung"+v_ran);
+        v_ranDiv.style.left = Math.ceil(Math.random()*500) + "px";
+        v_dongArr.push(v_ranDiv);
+        setTimeout(f_ranSel,800);
+    }
+
+    // 색을 랜덤으로 바꿔주는 함수
+    function f_ranColor(){
+        return "rgb(" + Math.floor(Math.random()*256) + ","
+               + Math.floor(Math.random()*256) + ","
+               + Math.floor(Math.random()*256) + ")";
+    }
+
+    // 선택된 글자 떨어뜨리는 기능만 하는 함수
+    function f_falling(){
+        for(var i=0; i<v_dongArr.length; i++){
+            var v_ranSpeed = Math.ceil(Math.random()*10);
+            v_dongArr[i].style.color = f_ranColor();  // 글자색
+            v_dongArr[i].style.backgroundColor = f_ranColor(); // 배경색
+            v_dongArr[i].style.transform = "rotate(" +
+                             Math.floor(Math.random()*360) + "deg)"; //회전
+            v_dongArr[i].style.top = parseInt(v_dongArr[i].style.top) 
+                                                + v_ranSpeed + "px";
+            if(parseInt(v_dongArr[i].style.top) >= 680){
+                v_dongArr[i].style.top = "-30px";
+                v_dongArr.splice(i, 1);
+            }
         }
-        v_ranDiv.style.top = parseInt(v_ranDiv.style.top) + 10 + "px";
-        setTimeout(f_start,100);
+        setTimeout(f_falling,500);
+    }
+
+    function f_start(){
+        f_ranSel();
+        f_falling();
     }
     v_start.onclick = f_start;
 
@@ -70,9 +133,9 @@
             v_div.innerHTML = v_jsStudy[i];
             v_div.setAttribute("id", "dayoung"+i);
             v_div.setAttribute("class","dongmin");
-            v_div.style.width = "50px";
-            v_div.style.height =  "5px";
-            v_div.style.top = "-80px";
+            v_div.style.width = v_jsStudy[i].length*9 + 5 + "px";
+            v_div.style.height = "20px";
+            v_div.style.top = "-30px";
             v_hhh.appendChild(v_div);
         }
     }

@@ -51,7 +51,3 @@ request.deleteParameter = function(p_pid){
     localStorage.setItem(v_tblName, JSON.stringify(v_dataArr));
 }
 
-request.aaa = function(){
-    console.log(222);
-    return;
-}

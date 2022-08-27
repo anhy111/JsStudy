@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+<script src="./js/function.js"></script>
+<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+</head>
+<body>
+<script>
+    var v_gul = {};     // 묶어주기 위한 빈 객체(name-space로 봐도 무방) 
+
+    v_gul.title = request.getParameter('nm_title');
+    v_gul.writer = request.getParameter('nm_writer');
+    v_gul.content = request.getParameter('nm_content');
+    
+    request.insertGul(v_gul);
+
+    swal('글쓰기 성공','목록으로 이동합니다.','success')
+        .then(function(){
+            location.replace("main.html");
+        });
+</script>
+</body>
+</html>
