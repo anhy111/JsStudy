@@ -10,25 +10,29 @@
 <body>
     <div class="menu">
         <a href="./main.html"><img id="logo" src="./images/letter-h.png"></a>
-        <a href="#">Home</a>
-        <a href="#">News</a>
-        <a href="#">Contact</a>
-        <a href="#">About</a>
-        <a href="#" class='button button5' style="color: white;margin-left: 400px;"
+        <a href="./main.html">Home</a>
+        <a href="./main.html">News</a>
+        <a href="./main.html">Contact</a>
+        <a href="./main.html">About</a>
+        <a href="#" id="id_loginStatus" class='button button5' style="color: white;margin-left: 400px;"
                 onclick='request.loginModalOpen()'>로그인</a>
     </div>
     <div class="body">
         <div id="leftMenu">
             <h3>카테고리</h3>
-            <button class='button button5 dummy' onclick='request.dummy()'>더미만들기</button>
+            <button class='button button5 catBtn' onclick='request.dummy()'>더미만들기</button>
+            <br>
+            <button class='button button5 catBtn' onclick='myGul()'>나의글검색</button>
+            <br>
+            <button class='button button5 catBtn' onclick='allGul()'>전체글검색</button>
         </div>
         <div id="gesi">
             <div id="background">
-                <h3>전체 글</h3><br>
+                <h3 id="id_headTitle">전체 글</h3><br>
                 <div id="id_list">
                 </div>
-                <a href="./write.html" class="button button5">새글쓰기</a>
-                <button class='button button5 delBtn' onclick='f_dels()'>일괄삭제</button>
+                <button id="id_newGul" class="button button5" onclick="f_check()">새글쓰기</button>
+                <button class='button button5 delBtn' onclick='f_check3()'>일괄삭제</button>
             </div>
         </div>
     </div>

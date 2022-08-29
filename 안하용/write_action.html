@@ -14,6 +14,11 @@
     v_gul.writer = request.getParameter('nm_writer');
     v_gul.content = request.getParameter('nm_content');
     
+    if(v_gul.title == null || v_gul.content == null){
+        location.href = "./write.html?nm_title=" + v_gul.title == null ? " " : v_gul.title + "&"
+                                + "nm_content=" + v_gul.content == null ? " " : v_gul.content; 
+    }
+
     request.insertGul(v_gul);
 
     swal('글쓰기 성공','목록으로 이동합니다.','success')

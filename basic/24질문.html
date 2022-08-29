@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        // sequence(순서) 중요. 한 줄씩 해석됨.
+        // alert(document.querySelector("#btn2").innerHTML);
+    </script>
+    <button id="btn1">버튼1</button>
+    <button id="btn2">버튼2</button>
+<script>
+
+    btn1.onclick = function(){
+        alert("메롱");
+    }
+    btn1.onclick = function(){
+        alert("안메롱");
+    }
+
+    var v_check = 1;
+    btn1.onclick = function(){
+        // 보통 자주 불리는(1번) 함수 안에 addEventListener를
+        // 사용하면 원하지 않게 여러번 실행되는 것을 확인 할 수 있음
+        // 꼭 잘 구분해서 사용
+        btn2.addEventListener("click",function(){
+            alert("완전메롱" + v_check++);
+        });
+    }
+
+
+</script>
+</body>
+</html>

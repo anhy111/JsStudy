@@ -137,6 +137,34 @@ request.isEmptyGul = function(){
     return 0;
 }
 
+// 게시글 검색하기  sessionStorage에 저장하여 검색을 확인
+request.registerSchWriter = function(p_writer){
+    sessionStorage.setItem("searchWriter",p_writer);
+}
+request.deleteSchWriter = function(){
+    sessionStorage.removeItem("searchWriter");
+}
+request.getSchWriter = function(){
+    return sessionStorage.getItem("searchWriter");
+}
+request.schGulsForWriter = function(){
+    var v_session = this.getSessionName();
+    if(!v_session){
+        this.loginModalOpen();
+        return;
+    }
+
+
+    var v_allGuls = this.getAllGul();
+    var v_arr = [];
+    for(var i=0; i<v_allGuls.length; i++){
+        if(v_allGuls[i].writer == v_session){
+            v_arr.push(v_allGuls[i]);
+        }
+    }
+    return v_arr;
+}
+
 // 회원 CRUD
 request.insertMember = function(p_mem){
     var v_tbl;
@@ -208,10 +236,11 @@ request.login = function(){
     var v_id = document.querySelector("#id_loginID").value;
     var v_pw = document.querySelector("#id_loginPW").value;
     v_mem = this.getMember(v_id);
-    if(!v_mem && v_mem.pw == v_pw){
-        swal('로그인 성공','목록으로 이동합니다.','success')
+    if(v_mem && v_mem.pw == v_pw){
+        swal('로그인 성공','오늘도 환영합니다.','success')
             .then(function(){
-                
+                sessionStorage.setItem("session",JSON.stringify(v_mem.name));
+                location.reload();
             });
     } else{
         swal('로그인 실패','ID 또는 PW가 다릅니다.','error')
@@ -220,7 +249,23 @@ request.login = function(){
             });
     }
 
-    this.loginModalClose();
+}
+
+request.getSessionName = function(){
+    return JSON.parse(sessionStorage.getItem("session"));
+}
+
+request.registerSession = function(p_mem){
+    sessionStorage.setItem("session",JSON.stringify(p_mem.name));
+}
+
+// 로그아웃
+request.logout = function(){
+    sessionStorage.removeItem("session");
+    swal('로그아웃 성공','목록으로 이동합니다.','success')
+    .then(function(){
+        location.href = "./main.html"; 
+    });
 }
 
 // 회원가입
@@ -233,6 +278,8 @@ request.signupOpen = function(){
 request.signupClose = function(){
     var v_modal = document.querySelector(".signup");
     v_modal.style.display = "none";
+    document.querySelector("#id_loginID").value = "";
+    document.querySelector("#id_loginPW").value = "";
 }
 
 request.signup = function(){
@@ -273,10 +320,14 @@ request.signup = function(){
 
 //더미
 request.dummy = function(){
+    if(this.isEmptyMem()){
+        swal("회원없음. 회원 생성 후 더미 만들기.");
+    }
+    var v_memNum = this.getAllMem();
     for(var i=1; i<=105; i++){
         var v_gul={};
         v_gul.title = "제목" + i;
-        v_gul.writer = "작성자" + i;
+        v_gul.writer = v_memNum[Math.floor(Math.random()*v_memNum.length)].name;
         v_gul.content = "내용" + i;
         this.insertGul(v_gul);
     }

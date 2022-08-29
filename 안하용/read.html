@@ -14,8 +14,8 @@
         <a href="#">News</a>
         <a href="#">Contact</a>
         <a href="#">About</a>
-        <a href="#" class='button button5' style="color: white;margin-left: 400px;"
-                onclick="request.loginModal()">로그인</a>
+        <a href="#" id="id_loginStatus" class='button button5' style="color: white;margin-left: 400px;"
+                onclick='request.logout()'>로그아웃</a>
     </div>
     <div class="body">
         <div id="leftMenu">
@@ -28,7 +28,33 @@
             </div>
         </div>
     </div>
-    <div></div>
+    <div class="login">
+        <div class="loginContent">
+            <h3 style="text-align:center">로그인</h3><br>
+            <h6>아이디</h6>
+            <input id="id_loginID" class="oneline" type="text" placeholder="아이디">
+            <br><br><h6>비밀번호</h6>
+            <input id="id_loginPW" class="oneline" type="password" placeholder="패스워드">
+            <div class="loginDiv">
+                <input type="button" class="button button5" value="로그인" onclick="request.login()">
+                <input type="button" class="button button5" value="회원가입" onclick="request.signupOpen()">
+            </div>
+        </div>
+    </div>
+    <div class="signup">
+        <div class="signupContent">
+            <h3 style="text-align:center;">회원가입</h3><br>
+            <h6>아이디</h6>
+            <input id="id_signID" class="oneline" type="text" placeholder="아이디">
+            <br><br><h6>비밀번호</h6>
+            <input id="id_signPW" class="oneline" type="password" placeholder="패스워드">
+            <br><br><h6>닉네임</h6>
+            <input id="id_signName" class="oneline" type="text" placeholder="닉네임">
+            <div class="signupDiv">
+                <input type="button" class="button button5" value="가입하기" onclick="request.signup()">
+            </div>
+        </div>
+    </div>
         
     <script src="./js/function.js"></script>
     <script src="./js/read.js"></script>

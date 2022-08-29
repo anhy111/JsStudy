@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<meta charset="UTF-8">
+<script>
+    // LocalStorage가 문자열밖에 저장을 못함(제약사항)
+    //  객체 그대로 저장안됨.
+    // JSON.stringify(객체), JSON.parse(JSON문자열)
+    // 객체지향DB처럼 저장가능
+    // 억지 예제
+
+    var v_sung = ["김","이","박","최","정","강","조","윤","장","임","한",
+             "오","서","신","권","황","안","송","류","전","홍","고",
+             "문","양","손","배","백","허","유","남","심","노","하",
+             "곽","성","차","주","우","구","라","민","진",
+             "지","엄","채","원","천","방","공","현","함","변",
+             "염","여","추","도","소","석","선","설",
+             "마","길","연","위","표","명","기","반","왕","금","옥",
+             "육","인","맹","제","모","남궁","탁","국","어",
+             "은","편","용","예","경","봉","사","황보","부","복",
+             "태","목","형","계","피","두","감","제갈","음",
+             "빈","동","온","사공","호","범","선우","좌","팽","승",
+             "간","상","시","갈","서문","옹","순","빙","종",
+             "풍","대","엽","궁","평","독고","견",
+             "매","동방","묵","탄","해","필","돈",
+             "운","곡","섭","야","후"
+    ];
+    //이름에 쓰이는 글자
+    var v_nameChar = "가나다라마바사아자차카타파하종환강산연수문주동기현석재경";
+    v_nameChar += "관우효정영민승준혁무건성보선지태훈용철희유진인숙형중호방"; 
+    v_nameChar += "룡미한식응순신열명권"; 
+    v_nameChar = v_nameChar.split("");
+    function f_ranName(){
+        return v_sung[Math.floor(Math.random()*v_sung.length)] +
+        v_nameChar[Math.floor(Math.random()*v_nameChar.length)] +
+        v_nameChar[Math.floor(Math.random()*v_nameChar.length)];
+    }
+
+
+    var v_dataArr = [];
+    for(var i=1; i<=10; i++){
+        var v_saram = {};
+        v_saram.name = f_ranName();
+        v_saram.age = Math.floor(Math.random()*100);
+        v_dataArr.push(v_saram);
+    }
+
+    localStorage.setItem("batman",JSON.stringify(v_dataArr));
+    // CRUD 하려면 꺼내서 수행후에 다시넣어야함.
+    
+    v_dataArr = JSON.parse(localStorage.getItem("batman"));
+    v_dataArr.push({"name":"김효정","boyfriend":"이동민"});
+    v_dataArr.push({"name":"이승연","boyfriend":"안하용"});
+
+
+    // cookie(쿠키, 먹는 거 아님) 대용으로 쓰면 짱 좋음(시대적 추세)
+    // 객체를 문자열화해서 저장하는 순간 정확히 MongoDB랑 똑같음
+    // 따로 객체지향 DB를 공부하지 않아도 됨.
+    localStorage.setItem("batman",JSON.stringify(v_dataArr));
+
+</script>

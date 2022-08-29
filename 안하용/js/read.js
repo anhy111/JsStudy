@@ -1,6 +1,11 @@
 
 window.onload = function() {
-    f_load();
+    var v_session = request.getSessionName();
+    if(!v_session){
+        request.loginModalOpen();
+    } else{
+        f_load();
+    }
 };
 
 

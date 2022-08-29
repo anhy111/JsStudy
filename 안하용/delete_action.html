@@ -16,27 +16,27 @@
         .then(function(){
             location.replace("main.html");
         });
-        swal({
-            title: "글을 삭제합니다",
-            text: "글을 삭제하시면 다시 불러올 수 없습니다.",
-            icon: "warning",
-            buttons: true,
-            dangerMode: true,
-        })
-            .then((willDelete) => {
-                if (willDelete) {
-                    request.deleteGul(v_gnum);
-                    swal("글을 삭제합니다.", {
-                    icon: "success",
-                    });
-                    location.replace("main.html");
-                } else {
-                    swal("이전화면으로 돌아갑니다")
-                        .then(function(){
-                            location.replace("read.html" + "?g_num="+v_gnum);
-                        })
-                }
-            });
+    swal({
+        title: "글을 삭제합니다",
+        text: "글을 삭제하시면 다시 불러올 수 없습니다.",
+        icon: "warning",
+        buttons: true,
+        dangerMode: true,
+    })
+        .then((willDelete) => {
+            if (willDelete) {
+                request.deleteGul(v_gnum);
+                swal("글을 삭제합니다.", {
+                icon: "success",
+                });
+                location.replace("main.html");
+            } else {
+                swal("이전화면으로 돌아갑니다")
+                    .then(function(){
+                        location.replace("read.html" + "?g_num="+v_gnum);
+                    })
+            }
+        });
 </script>
 </body>
 </html>
