@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+</head>
+<body>
+    <div id="id_disp"></div>
+    <input type="button" value="xml통" onclick="f_xml()">
+    <input type="button" value="제이슨통" onclick="f_json()">
+    <input type="button" value="테스트" onclick="f_csv()">
+    <input type="button" value="아직스 호출" onclick="f_ajax()">
+
+<script>
+
+    var v_disp = document.querySelector("#id_disp");
+
+    function f_xml(){
+        var v_ajax = new XMLHttpRequest();
+        v_ajax.open("get","25huk.xml",true);
+        v_ajax.onreadystatechange = function(){
+            if(v_ajax.readyState==4 && v_ajax.status == 200){
+                // alert(v_ajax.responseText);
+                //? xml은 이렇게 받지않음. xml을 문자열로 받으면 다루기 힘듬
+                // xml, html 모두 태그로 이루어진 문서임
+                var v_xmlDoc = v_ajax.responseXML;
+                f_dispXML(v_xmlDoc);
+                // var v_friends = v_xmlDoc.querySelectorAll("friend");    // queryselector은 태그를 가져온다
+                // var v_children = v_friends[0].children;
+                // for(var i=0; i<v_children.length; i++){
+                //     alert(v_children[i].innerHTML);
+                // }
+            }
+        }
+        v_ajax.send();
+    }
+
+    function f_dispXML(p_xml){
+        // p_doc를 이용해서 friend를 id_disp에 table출력형식으로 출력하기
+        var v_friends = p_xml.querySelectorAll("friend");
+        var v_tblStr = "<table border='1'>";
+        v_tblStr += "<tr>";
+        for(var i=0; i<v_friends[0].children.length; i++){
+            v_tblStr += "<th>";
+            v_tblStr += v_friends[0].children[i].tagName;
+            v_tblStr += "</th>";
+        }
+        v_tblStr += "</tr>";
+        for(var i=0; i<v_friends.length; i++){
+            v_tblStr += "<tr>";
+                for(var j=0; j<v_friends[i].children.length; j++){
+                    v_tblStr += "<td>";
+                    v_tblStr += v_friends[i].children[j].innerHTML;
+                    v_tblStr += "</td>";
+                }
+            v_tblStr += "</tr>";
+        }
+        v_tblStr += "</table>";
+        v_disp.innerHTML = v_tblStr;
+    }
+
+    function f_json(){
+        var v_ajax = new XMLHttpRequest();
+        v_ajax.open("get","25merong.json",true);
+        v_ajax.onreadystatechange = function(){
+            if(v_ajax.readyState == 4 && v_ajax.status == 200){
+                var v_arr = JSON.parse(v_ajax.responseText);
+                f_dispJSON(v_arr);
+            }
+        }
+        v_ajax.send();
+    }
+
+    function f_dispJSON(p_arr){
+        // 넘어온 값을 id_disp에 table형식으로 출력하시오
+
+        var v_tblStr = "<table border='100'>";
+        v_tblStr += "<tr>";
+        for( header in p_arr[0]){
+            v_tblStr += "<th>";
+            v_tblStr += header;
+            v_tblStr += "</th>";
+        }
+        v_tblStr += "</tr>";
+        for(var i=0; i<p_arr.length; i++){
+            v_tblStr += "<tr>";
+            for(v_field in p_arr[i]){
+                v_tblStr += "<td>";
+                v_tblStr += p_arr[i][v_field];
+                v_tblStr += "</td>";
+            }
+            v_tblStr += "</tr>";
+        }
+        v_tblStr += "</table>";
+        v_disp.innerHTML = v_tblStr;
+    }
+
+
+    var f_csv = function(){
+        var v_ajax = new XMLHttpRequest();
+        v_ajax.open("get","25test.csv",true);
+        v_ajax.onreadystatechange = function(){
+            if(v_ajax.readyState==4 && v_ajax.status==200){
+                f_dispCSV(v_ajax.responseText);
+            }
+        }
+        v_ajax.send();
+    }
+
+    function f_dispCSV(p_arg){
+        // 여기서 벼락같은 문제~
+        // 넘어온 값을 id_disp에 table형식으로 출력
+        var v_arr = p_arg.split("\n");
+        var v_td = [];
+        var v_th = v_arr[0];
+        for(var i=1; i<v_arr.length; i++){
+            v_td.push(v_arr[i]);
+        }
+        
+        var v_tblStr = "<table border='2'>";
+        v_th = v_th.split(",");
+
+        v_tblStr += "<tr>";
+        for(var i=0; i<v_th.length; i++){
+            v_tblStr += "<th>";
+            v_tblStr += v_th[i];
+            v_tblStr += "</th>";
+        }
+        v_tblStr += "</tr>";
+
+        for(var i=0; i<v_td.length; i++){
+            v_tblStr += "<tr>";
+            var v_tdData = v_td[i].split(",");
+            for(var j=0; j<v_tdData.length; j++){
+                v_tblStr += "<td>";
+                v_tblStr += v_tdData[j];
+                v_tblStr += "</td>";
+            }
+            v_tblStr += "</tr>";
+        }
+
+        v_disp.innerHTML = v_tblStr;
+
+    }
+
+
+    var v_myRoze;
+    function f_ajax(){
+        // 지우고 쓰고 3번해본다
+        var v_ajx = new XMLHttpRequest();
+        v_ajx.open("get","dummy.txt",true);
+        v_ajx.onreadystatechange = function(){
+            if(v_ajx.readyState==4 && v_ajx.status==200){
+                v_disp.innerHTML += "<h2>" + v_ajx.responseText + "</h2>";
+                v_myRoze = v_ajx.responseText;
+                // alert("아작");
+            }
+        }
+        v_ajx.send();
+
+        alert(v_myRoze);    // 많이하는 실수 비동기라 undefined가 뜸
+    }
+</script>
+
+</body>
+</html>
