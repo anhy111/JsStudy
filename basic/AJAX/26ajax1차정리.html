@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<meta charset="UTF-8">
+<script>
+    var $ = {}; // 네임스페이스용 빈 객체 생성
+
+    $.ajax = function (p_set){
+        var v_ajax = new XMLHttpRequest();
+        v_ajax.open(p_set.method,p_set.url,true);
+        v_ajax.onreadystatechange = function(){
+            if(v_ajax.readyState==4 && v_ajax.status==200){
+                p_set.success(v_ajax.responseText);
+            }
+        }
+        v_ajax.send();
+    }
+
+    // 호출
+    $.ajax({
+        method : "get",
+        url : "dummy.txt",
+        success : function(p_result){   // 콜백함수 잘 이해하기
+            alert("다시 넘어온 값 : " + p_result);
+        }
+    });
+
+    // 호출
+    $.ajax({
+        method : "get",
+        url : "25merong.json",
+        success : function(p_result){
+            alert("다시 넘어온 값 : " + p_result);
+        }
+    });
+    
+
+</script>
