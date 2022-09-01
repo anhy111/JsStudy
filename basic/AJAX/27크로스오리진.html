@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+</head>
+<body>
+    <input type="button" value="뉴스 가져오기" onclick="f_check()">
+
+<script>
+    // Cross Origin 개념 중요
+    // 개념 잘못알면 원래 안되는 일을 무한반복함
+    // xml은 다루기가 힘들어서 xml문자열을 json으로 바꿔주는 변환기가 있으면 좋음(스프링은 jackson이 존재)
+    
+    function f_check() {
+        var v_ajax = new XMLHttpRequest();
+        v_ajax.open("get","https://news.google.com/rss/search?q=%EA%B9%80%EA%B0%95%EC%82%B0&hl=ko&gl=KR&ceid=KR:ko",true);
+        v_ajax.onreadystatechange = function(){
+            if(v_ajax.readyState == 4 && v_ajax.status == 200){
+                console.log(v_ajax.responseText);
+            }
+        }
+        v_ajax.send();
+    }
+</script>
+</body>
+</html>

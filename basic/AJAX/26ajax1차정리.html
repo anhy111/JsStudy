@@ -1,6 +1,15 @@
 <!DOCTYPE html>
 <meta charset="UTF-8">
 <script>
+    // 네임스페이스 규모가 커질수록 나눠서 관리
+    var kor = {};
+    kor.seoul = {};
+    kor.daejeon = {};
+    kor.seoul.sh = "서울 승훈";
+    kor.daejeon.sh = "대전 승훈";
+
+
+
     var $ = {}; // 네임스페이스용 빈 객체 생성
 
     $.ajax = function (p_set){

@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<meta charset="UTF-8">
+
+<script>
+    var $ = {}; // 빈 객체
+    $.ajax = function (p_set){ // 빈 객체에 메서드 추가  
+        var v_ajax = new XMLHttpRequest();
+        if(p_set.type == "get"){
+            v_ajax.open(p_set.type,p_set.url + "?" + p_set.data, true);
+        } else{
+            v_ajax.open(p_set.type,p_set.url,true);
+        }
+        v_ajax.onreadystatechange = function(){
+            if(v_ajax.readyState == 4 && v_ajax.status == 200){
+                if(p_set.dataType == 'json'){
+                    p_set.success(JSON.parse(v_ajax.responseText));
+                } else if(p_set.dataType == 'text'){
+                    p_set.success(v_ajax.responseText);
+                }
+            }
+        }
+        if(p_set.type == "get"){
+            v_ajax.send();
+        } else{
+            v_ajax.setRequestHeader("Content-Type","application/x-www-form-urlencoded");
+            v_ajax.send(p_set.data);    // post방식 일 때는 send()안에 data
+        }
+    }
+
+    $.ajax({
+        type: "get",
+        url: "25merong.json",
+        data: "",
+        dataType: "text",
+        success: function (p_result){
+            console.log("잘 이해됨?",p_result);
+        }
+    });
+
+
+</script>
