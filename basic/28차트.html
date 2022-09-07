@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+    <!-- canvas태그의 부모 영역의 크기가 차트 크기를 정함 -->
+    <div style="width: 400px; height: 400px;border: 2px solid black;">
+        <canvas id="myChart"></canvas>
+    </div>
+    <!-- 문서가 완전 엉터리임 -->
+    <input type="button" value="차트업데이트" onclick="f_update()">
+    <input type="button" value="아작스로데이터" onclick="f_update2()">
+
+<script>
+    
+    function f_update2(){
+        // gaejul 디렉토리의 testData.json을 아작스로
+        // 가져와서 차트에 그리기
+        var v_ajax = new XMLHttpRequest();
+        v_ajax.open("get","./28gaejul/testData.json",true);
+        v_ajax.onreadystatechange = function(){
+            if(v_ajax.readyState == 4 && v_ajax.status == 200){
+                var v_json = JSON.parse(v_ajax.responseText);
+
+                myChart.data.datasets[0].data = v_json.score;
+                myChart.data.labels = v_json.label;
+                myChart.data.datasets[0].label = v_json.name;
+                myChart.data.datasets[0].backgroundColor = f_color(2);
+                myChart.data.datasets.splice(1,myChart.data.datasets.length-1);
+                myChart.update();
+
+            }
+        }
+        v_ajax.send();
+
+    }
+
+    function f_ran255(){
+        return Math.floor(Math.random()*255);
+    }
+    function f_ranAlpha(){
+        // 0.1 ~ 0.9발생 -> 숫자로 변환(소숫점 가지도록)
+        return parseFloat("0." + Math.ceil(Math.random()*9));
+    }
+
+    // 칼라는 차트생성 코드에 넣으면 라인만 길어짐
+    function f_color(p_cnt){
+        var v_colors = [];
+        var v_colorStr = "";
+        for(var i=1; i<=p_cnt; i++){
+            v_colorStr = "rgba(" + f_ran255() + "," + f_ran255() + "," 
+                        + f_ran255() + "," + f_ranAlpha() + ")";
+            v_colors.push(v_colorStr);
+        }
+        return v_colors;
+    }
+
+    var v_types = ["bar","line","radar","pie","doughnut"];
+    function f_update(){
+        var v_datas = [];
+        var v_datas2 = [];
+        for(var i=1; i<=6; i++){
+            var v_ranVal = Math.ceil(Math.random() * 300);
+            v_datas.push(v_ranVal);
+            v_ranVal = Math.ceil(Math.random() * 300);
+            v_datas2.push(v_ranVal);
+        }
+
+        // 만든 데이터를 차트에 주기
+        // 데이터(다른것도 매한가지)를 다시 넣으면
+        // 차트를 다시 그려야 함 --포인트
+        // myChart.data.datasets[0].type = v_types[Math.floor(Math.random()*5)];
+        myChart.data.datasets[0].data = v_datas;
+        myChart.data.datasets[1].data = v_datas2;
+        myChart.update();   //Chart.js에서 제일 중요한 메서드,
+                            // rendering이라고 부름
+        setTimeout(f_update,800);
+    }
+    const ctx = document.getElementById('myChart').getContext('2d');
+    const myChart = new Chart(ctx, {
+        type: 'bar', // bar,line,pie,radar,doughnut...등등
+        data: {
+            labels: ['Red', 'Blue', 'Yellow', 'Green', 'Purple', 'Orange'],
+            datasets: [{
+                    type:"bar",
+                    label: '# 승연 짱',
+                    data: [12, 19, 3, 5, 2, 3],
+                    backgroundColor: f_color(6),
+                    borderWidth: 1
+                },
+                {
+                    type:"line",  // 오직 bar와 line만 같이 한 차트에 나올 수 있음
+                    label: '# 난 짱',
+                    data: [21, 91, 6, 8, 12, 23],
+                    backgroundColor: f_color(6),
+                    borderWidth: 1
+                }
+            ]
+        },
+        options: {
+            scales: {
+                y: {
+                    beginAtZero: true
+                }
+            }
+        }
+    });
+    // canvas 태그는 그래픽용,
+    // 브라우저 기반 게임개발하는 회사나
+    // 예쁜 브라우져용 웹 컴포넌트를 만드는 회사에서 주로 사용
+    // 일반적인 웹프로그램 개발자와는 조금 거리가 있음
+    // 그래픽 엔진으로 유명한 건 마이크로 소프트의 Direct-X가 있고
+    // canvas는 오픈소스인 WebGl(web Graphic Library)를 사용
+
+    // 데이터 접근이 아주 쉬움
+    // chart.js는 구조(json형식)만 파악하면 핵심 사용법 끝
+// alert(myChart.data.datasets[0].data);
+
+
+</script>
+</body>
+</html>

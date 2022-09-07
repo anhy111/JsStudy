@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<meta charset="UTF-8">
+
+<script>
+    // 다른 소스에 this를 썻는지 안 썼는지 확인하면서 
+    // 프로그램 하는 것은 버겁다
+    // call, apply, bind : call하고 apply는 둘중 하나만 기억해도 상관없음
+    
+    function f_check(p_arg1,p_arg2){
+        console.log(this,p_arg1,p_arg2);
+    }
+    var v_sj = {"name":"선주"};
+    var v_mj = {"name":"민정"}
+
+    // 함수호출
+    // 매개변수가 있으면 call의 두번째 매개변수부터 순서로 넣는다.
+    // 첫번째 매개변수는 this를 컨트롤할 객체
+    f_check.call(v_sj,"ㅅㅈ","ㅎㅎ"); // this를 강제로 v_sj를 가리키게 함
+    f_check.call(v_mj,"ㅁㅈ","ㅊㅊ"); // this를 강제로 v_mj를 가리키게 함
+
+    // apply는 call과 같지만 매개변수들을 배열에 담아서 넘겨야 함
+    // 상황에 따라 apply가 더 편할 수 있지만 기본기능은 똑같음
+    f_check.apply(v_sj,["ㅅㅈ","ㅎㅎ"]);
+    f_check.apply(v_mj,["ㅁㅈ","ㅊㅊ"]);
+
+    /*
+        call과 apply의 첫번째 매개변수값이 this에 세팅된다는 사실
+    */
+
+</script>

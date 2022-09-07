@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+</head>
+<body>
+    <input type="button" value="스영" onclick="f_click('스응연')">
+    <input type="button" value="지현" id="jh">
+<script>
+
+    /*  보통 개발자가 생각할 수 있는 방법
+    function myLog(p_arg){
+        document.write(p_arg + "<br>");
+    }
+   
+
+    /* 참조방식을 잘 이해한 개발자가 생각할 수 있는 방법 */
+    // myLog = document.write; 
+
+
+    /* 닳고 닳아서 더 이상 호기심 없는 개발자가 생각하는 방법
+        문법 오류가 없는데 안되니 this영향을 생각함
+    */
+    myLog = document.write.bind(document);  // this만 바꾼 새로운 메서드 포인터 리턴
+    
+    myLog("<h1>산에 출물하는 물건 산출물</h1>");
+    myLog("<h1>나무를 가지고 싶다 했더니 나물 나옴</h1>");
+
+    function f_click(p_arg){
+        console.log("으응:",this);
+        alert("넘어온 값 : " + p_arg);
+    }
+
+    var v_jhBtn = document.querySelector("#jh");
+    // v_jhBtn.onclick = f_click.call({"name":"난안하용"},"흐흠");  
+    //()를 못붙여서 매개변수를 넘길 수 없음
+    // 이럴때 쓰는게 bind
+    // bind는 내부적으로 매개변수값을 가진 함수를 만들고
+    // 그 함수의 포인터값(보통 함수이름이라 함)만 리턴해줌
+    v_jhBtn.onclick = f_click.bind({"name":"난안하용"},"흐흠");
+    // 차트: json구조, update, call,apply, bind(특별함)
+</script>
+</body>
+</html>

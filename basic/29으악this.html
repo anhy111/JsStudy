@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<meta charset="UTF-8">
+<script>
+
+    var v_obj = {};
+    v_obj.aaa = "aaa"; //속성 메서드 추가할 땐 원하는 이름 맘대로(키워드만 아니면)
+    v_obj.bbb = "bbb";
+
+    delete v_obj.aaa;   // 속성/메서드 지우기
+    console.log(v_obj); // 항상 눈으로 확인 -> 습관이 80%이상 실력 좌우함
+
+
+
+
+    function f_this(){
+        console.log(this);  // window
+    }
+
+    window.f_this();
+
+    var v_hjh = {"name":"허지현","point":"신반장"}; // 객체 생성
+    v_hjh.merong = f_this;
+    // merong은 f_this를 참조, 곧 같은 곳을 가리키는 값, merong부르면 f_this
+    v_hjh.merong(); // this?
+
+    var v_roze = {"name":"으악로제"};
+    f_this.call(v_roze);    // this가 v_roze를 가리키도록 강제세팅
+    // call, apply, bind를 쓰면 this값을 쫓아다니지 않고 원하는 값으로
+    // 강제 세팅할 수 있어서 완전 편함.
+</script>

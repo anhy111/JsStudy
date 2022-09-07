@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+<!-- <script src="./myQuery.js"></script> -->
+</head>
+<body>
+    <input type="text" id="txt1" value="흡!"><br>
+    <input type="text" id="txt2" value="윽!"><br>
+    <input type="text" id="txt3" value="뿌"><br>
+    <input type="text" id="txt4" value="욱!"><br>
+    <div id="whathayoung" class="roze" style="border: 1px solid pink;">뭐해요1</div>
+    <div id="whathayoung" class="roze" style="border: 1px solid pink;">뭐해요2</div>
+    <div id="whathayoung" class="roze" style="border: 1px solid pink;">뭐해요3</div>
+    <div id="whathayoung" class="roze" style="border: 1px solid pink;">뭐해요4</div>
+<script>
+    /*
+    $("#whathayoung").click(function(){
+        alert("왜 눌러");
+    });
+    */
+
+    $(".roze").on("click",function(){     // js의 addEventListener에 해당
+        alert("메롱");
+    }).html(function(p_inx, p_html){
+        if(p_html == "뭐해요1"){
+            return "암것도 안해요";     
+        }
+        return p_html;
+    })
+
+    console.log($(".roze").eq(1));
+
+    // 개발자들이 value속성을 자주 다루다 보니, jQuery에는
+    // val() 이라는 value속성만을 다루는 메소드가 존재함
+    // html() 메서드와 사용법이 동일
+    // alert($("input").val());
+    // alert($("#txt3").val());
+    // $("input").val("음하하하");
+    $("input").val(function(p_inx, p_val){
+        if(p_val.indexOf("뿌") != -1){
+            return "ㅋㅋ";
+        }
+        if(p_inx == 1){
+            return "ㅎㅎ";
+        }
+        return p_val;
+    });
+</script>
+</body>
+</html>

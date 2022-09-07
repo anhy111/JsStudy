@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<meta charset="UTF-8">
+<script>
+    // java의 ArrayList는 js의 배열에 해당
+    // 생성자
+    
+    function ArrayList(){
+
+        this.length = 0;    // 생성될 때 갯수 0
+
+        return this;    
+        // function키워드가 class로 사용되고 있다는 의미(100%는 아님)
+    }
+
+    // 메소드 추가, prototype은 그저 메모리절약을 위한 것
+    // 크게 신경안써도됨
+    ArrayList.prototype.add = function(p_arg){
+        this[this.length] = p_arg;
+        this.length++;
+        return this;     //메서드는 일반 함수라서 그냥 return이 생략되어있음 메서드 체이닝을 위함
+    }
+
+    ArrayList.prototype.get = function(p_inx){
+        return this[p_inx];
+    }
+
+    ArrayList.prototype.remove = function(p_inx){
+        // 가운데 숫자가 빠지는걸 순서대로 나오도록함
+        for(var i=p_inx; i<this.length-1; i++){
+            this[i] = this[i+1];
+        }
+        delete this[this.length-1];
+        // 객체 속성 지울 때 사용했던 키워드
+        this.length--;
+        return this;
+    }
+
+    var j_arrList = new ArrayList();
+    /*
+    j_arrList.add("하용");
+    j_arrList.add("승훈");
+    j_arrList.add("연수");
+    */
+
+    j_arrList.add("하용")
+            .add("승훈")
+            .add("연수")
+            .add("민정")
+            .add("문주")
+            .add("성보")
+            .add("배신");
+
+    j_arrList.remove(1)
+            .remove(1)
+            .remove(1)
+            .remove(1)
+            .remove(1);
+
+    console.log("check1:",j_arrList);     // 눈으로 확인
+    j_arrList.remove(1);     // 눈으로 확인
+    console.log("check1:",j_arrList);     // 눈으로 확인
+
+
+    // 패키지 
+</script>

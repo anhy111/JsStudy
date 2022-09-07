@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<meta charset="UTF-8">
+<script>
+
+    function f_argCheck(p_arg){
+        alert(p_arg);
+    }
+
+
+
+
+    function MyArray(){
+        // length가 핵심 속성
+        this.length = 0;
+        return this;    // 생략가능하지만 class를 명시적으로 알려주기 위해 return문을 붙임
+    }
+    // 메소드 추가 prototype방식으로
+    MyArray.prototype.push = function(p_arg){
+        this[this.length++] = p_arg;    // 직접 length를 컨트롤 해야 함
+    }
+
+    MyArray.prototype.min = function(){
+        var v_min = this[0];
+        for(var i=0; i<this.length; i++){
+            if(v_min > this[i]){
+                v_min = this[i];
+            }
+        }
+        return v_min;
+    }
+    
+    MyArray.prototype.max = function(){
+        var v_max = this[0];
+        for(var i=0; i<this.length; i++){
+            if(v_max < this[i]){
+                v_max = this[i];
+            }
+        }
+        return v_max;
+    }
+
+    MyArray.prototype.forEach = function(p_cb, p_index){
+        for(var i=0; i<this.length; i++){
+            // 함수.call(this세팅값, 매개변수)
+            // p_cb.call(this,this[i],i);
+            p_cb(this[i],i);
+            console.log(this);
+        }
+    }
+
+    MyArray.prototype.sort = function(p_cb){
+        if(!p_cb){      // 매개변수 없으면 버블정렬
+            // 가장 쉬운 정렬 버블정렬, max와 min을 구하는
+            // 알고리즘만 이해하면 문제없음
+            for(var i=0; i<this.length; i++){
+                for(var j=i+1; j<this.length; j++){
+                    if(this[i] < this[j]){
+                        var v_temp = this[i];
+                        this[i] = this[j];
+                        this[j] = v_temp;
+                    }
+                }
+            }
+            return this;     // 리턴
+        }
+
+        if(typeof(p_cb) == "function"){     // 매개변수의 타입 확인
+            for(var i=0; i<this.length; i++){
+                for(var j=i+1; j<this.length; j++){
+                    // 이해가 잘 안되면 될 떄까지 쫓아간다~
+                    if(p_cb(this[i],this[j]) > 0){  // 요 라인이 sort(callback)핵심
+                        var v_temp = this[i];
+                        this[i] = this[j];
+                        this[j] = v_temp;
+                    }
+                }
+            }
+            return this;     // 리턴
+        }
+    }
+
+
+
+    /*********************** 클래스 사용부(호출) ***********************/
+    /*** CallBack 함수 헷갈리는 사람들 꼭 다시한번 정리 ***/
+    var v_arr = new MyArray();
+    v_arr.push(200);
+    v_arr.push(100);
+    v_arr.push(120);
+    v_arr.push(150);
+    console.log(v_arr.sort(function(a,b){
+        return b-a;
+    }));
+    // v_arr.forEach(function(p_arg, p_index){
+    //     // forEach가 항상 for문을 돌려주기 때문에
+    //     // 호출시 개별 값 처리만 callback함수에서 처리하면 됨
+    //     if(p_arg == 100){
+    //         this[p_index] = 300;
+    //     }
+    // });
+    console.log(v_arr);
+</script>

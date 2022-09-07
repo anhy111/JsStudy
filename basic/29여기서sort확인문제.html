@@ -1,0 +1,96 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+</head>
+<body>
+    
+    <div id="id_disp"></div>
+
+
+
+<script>
+
+    var v_datas = [
+        {
+            "name":"승훈",
+            "birth":"2021-01-01",
+            "skill":"javascript"
+        },
+        {
+            "name":"하용",
+            "birth":"2020-08-08",
+            "skill":"angular"
+        },
+        {
+            "name":"연수",
+            "birth":"1960-11-11",
+            "skill":"oracle"
+        },
+        {
+            "name":"재경",
+            "birth":"1999-12-25",
+            "skill":"viewjs"
+        },
+        {
+            "name":"종환",
+            "birth":"2012-07-07",
+            "skill":"all"
+        }
+    ]
+
+// name으로 정렬해서 출력하시오
+v_datas.sort(function(a,b){
+    if(a["name"] >= b["name"]){
+        return 1;
+    }
+    return -1;
+})
+id_disp.innerHTML += "<h3>name정렬</h3>";
+f_disp(v_datas);
+
+
+// birth로 정렬해서 출력하시오
+v_datas.sort(function(a,b){
+    if(a["birth"] >= b["birth"]){
+        return 1;
+    }
+    return -1;
+})
+id_disp.innerHTML += "<h3>birth정렬</h3>";
+f_disp(v_datas);
+
+
+// skill로 정렬해서 출력하시오
+v_datas.sort(function(a,b){
+    if(a["skill"] >= b["skill"]){
+        return 1;
+    }
+    return -1;
+})
+id_disp.innerHTML += "<h3>skill정렬</h3>";
+f_disp(v_datas);
+
+function f_disp(p_json){
+    v_tblStr = "<table border='1'>";
+    v_tblStr += "<tr>";
+    v_tblStr += "<th>name</th>";
+    v_tblStr += "<th>birth</th>";
+    v_tblStr += "<th>skill</th>";
+    v_tblStr += "</tr>";
+    for(var i=0; i<5; i++){
+        v_tblStr += "<tr>";
+        v_tblStr += "<td>" + p_json[i].name + "</td>";
+        v_tblStr += "<td>" + p_json[i].birth + "</td>";
+        v_tblStr += "<td>" + p_json[i].skill + "</td>";
+        v_tblStr += "</tr>";
+    }
+    v_tblStr += "</table>";
+    id_disp.innerHTML += v_tblStr;
+}
+</script>
+
+</body>
+</html>

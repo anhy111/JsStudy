@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+</head>
+<body>
+    <h1>on이벤트명=함수 addEventListener(이벤트명, 함수) 둘 다 필요해요</h1>
+    <input type="button" id="btn1" value="누르쇼">
+    <input type="button" id="btn2" value="누를까말까">
+<script>
+    var v_btn1 = document.querySelector("#btn1");
+    var v_btn2 = document.querySelector("#btn2");
+
+    v_btn1.onclick = function(){
+        alert("완전 메롱...");
+    }
+    v_btn1.onclick = function(){
+        alert("바밤바 밤으로만든 바밤바");
+    }
+
+    // 위험한 소스, alert가 안 들어가 있으면 찾기도 어려움
+    // v_btn2.addEventListener("click", function(){
+    //     v_btn1.addEventListener("click", function(){
+    //         alert("바밤바");
+    //     })
+    // });
+
+    // 조금더 안전한 소스
+    // v_btn2.addEventListener("click", function(){
+    //     v_btn1.onclick = function(){
+    //         alert("바밤바");
+    //     }
+    // });    
+    
+    // 근본적으로 2가지 차이를 명확히 이해하고 상황에 맞게 사용하는 것이 중요
+</script>
+</body>
+</html>

@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+</head>
+<body>
+    <div id="disp">
+        <img src="/jsstudy/basic/images/고양이1.jpg" width="100" height="100">
+        <img src="/jsstudy/basic/고양이2.jpg" width="100" height="100">
+        <img src="/jsstudy/basic/images/고양이3.jpg" width="100" height="100">
+        <img src="/basic/images/고양이6.jpg" width="100" height="100">
+    </div>
+    <input type="button" value="이동하네" onclick="f_move()">
+    <script>
+        var v_disp = document.querySelector("#disp");
+        var v_imgs = document.querySelectorAll("img");
+        
+        function f_move(){
+            var v_img1 = document.querySelectorAll("img")[0]; // 첫번쨰 img태그
+            // 이미있는 태그를 appendChild하면 맨 뒤로감
+            v_disp.appendChild(v_img1);
+            
+        }
+
+    </script>
+</body>
+</html>

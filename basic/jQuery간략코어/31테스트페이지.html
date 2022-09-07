@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+<script src="./myQuery.js"></script>
+</head>
+<body>
+    <input type="text" name="메롱" id="아이디" value="메롱받고메롱 더">
+    <input type="text" name="메롱" id="아이디1" value="메롱받고메롱 더">
+    <input type="text" name="메롱" id="아이디2" value="메롱받고메롱 더">
+    <div id="dv1" class="blackpink">하이 로제</div>
+    <div id="dv2" class="blackpink">하이 제니</div>
+    <div id="dv3" class="blackpink">하이 리사</div>
+    <div id="dv4" class="blackpink">하이 민정</div>
+<script>
+    console.log($(".blackpink").html("배신자"));
+    /*
+    $(".blackpink").attr("class","bangtan")
+                    .html(function(p_inx, p_str){
+                        if(p_inx == 1) return "뷔와 제니";
+                        return p_str;
+                    })
+                    .html(function(p_inx, p_str){
+                        if(p_inx == 0) return p_str + "만만세";
+                        return p_str;
+                    })
+                    .attr("class",function(p_inx,p_attr){
+                        if(p_inx == 3) return "merong";
+                        return p_attr;
+                    });
+                    */
+
+    // alert($("input").attr("name"));
+    // $("input").attr("type","checkbox");
+    // 콜백과 this의 지옥에 빠짐
+
+    // $("input").attr("type",function(p_index, p_attr){
+    //     console.log("인덱스:",p_index, "속성값:", p_attr);
+    //     if(p_index == 1){
+    //         return "checkbox";
+    //     }
+    //     return p_attr;
+    // });
+
+    // $("input").attr("type","radio");
+    // $("input").attr("value","방탄");
+
+
+    // $("input").attr(v_samObj);
+
+    // $("input").attr({
+    //     "type":"radio",
+    //     "value":"방탄"
+    // }).html("").attr();
+
+
+</script>
+</body>
+
+</html>

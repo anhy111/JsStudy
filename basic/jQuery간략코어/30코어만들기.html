@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<meta charset="UTF-8">
+<body>
+    <div id="disp">
+        <div class="aaa">안젤리나 로제</div>
+        <div class="aaa ccc">안젤리나 제니</div>
+        <div class="aaa">안젤리나 리사</div>
+        <div class="aaa ccc">안젤리나 다영</div>
+    </div>
+</body>
+<script>
+
+    // 즉각 실행함수 형태로 핵심코드 보호
+    // var $; 이렇게 하는 게 너무 없어보이고 코드를 한 블록으로
+    // 묶고 싶은 욕구에 짜증남
+    (function(){
+        // new 키워드를 없애고 싶었음
+        $ = function(p_sel){
+            return new myDom(p_sel);
+        }
+        var myDom = function(p_sel){
+            var v_elems = document.querySelectorAll(p_sel);
+            this.length = v_elems.length;
+            for(var i=0; i<v_elems.length; i++){    // 객체 속성으로 옮겨담기
+                this[i] = v_elems[i];
+            }
+            return this;    // 이것으로 myDom 함수는 class라는 걸 명시적으로 알려줌
+        }
+        // 메서드를 추가하려면 아래처럼 해야 되는데
+        // 이것이 핵심코드 영역의 침범을 내비두는 것 같아서 싫음.
+        // 더구나 개발자들이 자신들이 필요한 메서드를 추가하고픈 상황에도
+        // 적절치 않아 보여 prototype을 밖으로 꺼내기도 함.
+        // myDom.prototype.메소드명 = function(){ }
+
+
+        window.$ = $;
+        $.fn = myDom.prototype; // prototype속성을 fn속성으로 밖으로 꺼냄
+    })();
+
+    // 이제 즉각 실행함수 밖에서도 메서드를 추가할 수 있게 됨
+    // 보통 제공되는 것 외에 개발자가 추가하는 메서드를 jQuery플러그인이라함
+    $.fn.eq = function(p_index){
+        return this[p_index];
+    }
+
+
+    // jQuery에서 자주 쓰는 메서드 만들어 보기
+    // 먼저 html메서드 -> innerHTML 속성을 편하게 제어해 주는 메서드
+    $.fn.html = function(p_arg){
+        if(!p_arg){ // 매개변수 값 없이 불려졌을떄, 읽기를 위함
+            // jQuery개발팀은 그냥 첫번째 선택된 것의 innerHTML을 리턴하기로 함
+            return this[0].innerHTML;
+        }
+
+        if(typeof(p_arg) == "string"){
+            for(var i=0; i<this.length; i++){
+                this[i].innerHTML = p_arg;
+            }
+        }
+
+        if(typeof(p_arg) == "function"){
+            console.log("선언:",this);
+            for(var i=0; i<this.length; i++){
+                this[i].innerHTML = p_arg.call(this[i],i,this[i].innerHTML);
+            }
+        }
+    }
+
+    // jQuery 잘 쓰려면 css선택자 다시 정리필요
+    // var v_dom1 = new myDom("#disp");
+    var v_dom2 = $(".aaa");
+    // v_dom2.html("난 최고의 프로그래머");
+
+    // 내부적으로 for문을 돌려주기때문에 각 요소에 대한 처리만 정의
+    // for(var i=0; i<length; i++){
+    //  사용자정의 함수호출()
+    // }
+    v_dom2.html(function(p_index, p_html){
+        console.log(this);
+        if(p_index == 1){
+            return "난 정말 자바스크립트가 쉬워요";
+        }
+        return this.innerHTML;  // 원래 값 리턴
+    });
+
+</script>

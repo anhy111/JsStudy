@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+</head>
+<body>
+    <table border="2">
+        <tbody id="id_tbody">
+            <tr>
+                <th onclick="f_tSort();">제목</th>
+                <th onclick="f_wSort();">지은이</th>
+                <th onclick="f_cSort();">내용</th>
+                <th onclick="f_dSort();">날짜</th>
+            </tr>
+            <tr>
+                <td>하용만만세</td>
+                <td>하용</td>
+                <td>할거야 안 할거야</td>
+                <td>2022-09-22</td>
+            </tr>
+            <tr>
+                <td>승훈만만세</td>
+                <td>승훈</td>
+                <td>블링크 가입하삼</td>
+                <td>2022-06-12</td>
+            </tr>
+            <tr>
+                <td>아무나만만세</td>
+                <td>누가무나</td>
+                <td>트와이스짱</td>
+                <td>2021-05-02</td>
+            </tr>
+            <tr>
+                <td>로제만만세</td>
+                <td>쵸리</td>
+                <td>역시 로제가 짱</td>
+                <td>2022-09-06</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <script>
+        var v_trs = document.querySelectorAll("tr");
+        var v_tbody = document.querySelector("#id_tbody");
+        var v_arrTr = [];
+        var v_checkTS = false;
+        var v_checkWS = false;
+        var v_checkCS = false;
+        var v_checkDS = false;
+        for(var i=1; i<v_trs.length; i++){
+            v_arrTr.push(v_trs[i]);
+        }
+
+        console.log(v_arrTr[0].children[0].innerHTML);
+
+
+        function f_disp(){
+            for(var i=0; i<v_arrTr.length; i++){
+                v_tbody.appendChild(v_arrTr[i]);
+            }
+        }
+
+        function f_sort(p_index, p_foward=1){
+            // p_foward : 오름차순1, 내림차순 -1;
+            v_arrTr.sort(function(a,b){
+                if(a.children[p_index].innerHTML >= b.children[p_index].innerHTML){
+                    return p_foward;
+                }
+                return -p_foward;
+            });
+        }
+
+        function f_tSort(){
+            if(!v_checkTS){
+                f_sort(0);
+                v_checkTS = true;
+            } else{
+                f_sort(0,-1);
+                v_checkTS = false;
+            }
+            f_disp();
+        }
+
+        function f_wSort(){
+            if(!v_checkWS){
+                f_sort(1);
+                v_checkWS = true;
+            } else{
+                f_sort(1,-1);
+                v_checkWS = false;
+            }
+            f_disp();
+        }
+
+        function f_cSort(){
+            if(!v_checkCS){
+                f_sort(2);
+                v_checkCS = true;
+            } else{
+                f_sort(2,-1);
+                v_checkCS = false;
+            }
+            f_disp();
+        }
+
+        function f_dSort(){
+            if(!v_checkDS){
+                f_sort(3);
+                v_checkDS = true;
+            } else{
+                f_sort(3,-1);
+                v_checkDS = false;
+            }
+            f_disp();
+        }
+
+        // 힌트: 
+    </script>
+</body>
+</html>

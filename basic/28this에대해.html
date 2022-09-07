@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<meta charset="UTF-8">
+<script>
+    // this(이것)가 무엇? 이해가 굉장히 중요
+    // 전역변수를 선언한 것은 window객체의 속성을 추가한 것과 같고
+    // 전역함수를 선언한 것은 window객체의 메서드를 추가한 것과 같다.
+    // 그저 앞에 window를 생략하고 사용함
+
+    /*
+    function f_check(){
+        console.log("this?:",this);
+    }
+    */
+    window.f_check = function(){
+        console.log("메롱",this);   // 위 함수선언과 동일
+    }
+    // window.f_check();
+
+    var v_dayoung = {"name":"윤다영","problem":"공부안함"};
+    v_dayoung.print = f_check;
+
+    // this가 가리키는 값이 동적으로 바뀜
+    // 소스가 길어지고 복잡해지면 머리속에 이걸 담고 프로그램 해야함
+    // 스트레스가 깊어짐, 그래서 집단 항의를 해서 this를 컨트롤하고자 함
+    window.f_check();
+    v_dayoung.print();  // 호출, f_check가 호출
+
+    // var sagiGGUN = "이준혁";
+    window.sagiGGUN = "이준혁"; //위 라인과 동일
+    // alert(window.sagiGGUN);
+
+</script>
