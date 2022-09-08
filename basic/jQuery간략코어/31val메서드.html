@@ -3,24 +3,55 @@
 <head>
     <meta charset="UTF-8">
     <title>Document</title>
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-<!-- <script src="./myQuery.js"></script> -->
+<!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script> -->
+<script src="./myQuery.js"></script>
 </head>
 <body>
     <input type="text" id="txt1" value="흡!"><br>
     <input type="text" id="txt2" value="윽!"><br>
     <input type="text" id="txt3" value="뿌"><br>
     <input type="text" id="txt4" value="욱!"><br>
-    <div id="whathayoung" class="roze" style="border: 1px solid pink;">뭐해요1</div>
+    <div id="whathayoung" class="roze" style="border: 1px solid pink; color:black;">뭐해요1</div>
     <div id="whathayoung" class="roze" style="border: 1px solid pink;">뭐해요2</div>
     <div id="whathayoung" class="roze" style="border: 1px solid pink;">뭐해요3</div>
     <div id="whathayoung" class="roze" style="border: 1px solid pink;">뭐해요4</div>
 <script>
+
+
+    console.log($(".roze").eq(1).end());
+
+
+    // console.log($(".roze"));
+    // $(".roze").eq(1).html("메롱").css("color","blue")
+    //         .css("font-size","2em").attr("id","dongi");
+
+    // alert($(".roze").css("border"));
+    // alert($(".roze").css("color"));
+
+    // jQuery 사용시
+    // $(".roze").css("font-size","4em");
+    // $(".roze").css("backgroundColor","blue");
+    // $(".roze").css("color",function(p_inx, p_val){
+    //     if(p_inx == 2){
+    //         return "rgba(255,0,255,0.5)";
+    //     }
+    //     return p_val;
+    // });
+
+
+    // 일반적인 사용방법
+    // var v_rozes = document.querySelectorAll(".roze");
+    // for(var i=0; i<v_rozes.length; i++){
+    //     v_rozes[i].style.fontSize = "4em";
+    //     v_rozes[i].style.backgroundColor = "pink";
+    // }
+
     /*
     $("#whathayoung").click(function(){
         alert("왜 눌러");
     });
     */
+
 
     $(".roze").on("click",function(){     // js의 addEventListener에 해당
         alert("메롱");
@@ -31,7 +62,7 @@
         return p_html;
     })
 
-    console.log($(".roze").eq(1));
+    // console.log($(".roze").eq(1));
 
     // 개발자들이 value속성을 자주 다루다 보니, jQuery에는
     // val() 이라는 value속성만을 다루는 메소드가 존재함

@@ -6,6 +6,7 @@
     var myDom = function(p_sel){
         var v_elems = document.querySelectorAll(p_sel);
         this.length = v_elems.length;
+        this.origin = p_sel;
         for(var i=0; i<v_elems.length; i++){   
             this[i] = v_elems[i];
         }
@@ -22,6 +23,14 @@ $.fn.eq = function(p_index){
     // return this[p_index];
     // 안 바쁜 사람은 여기를 어떻게 바꾸면 실제 jQuery의 eq처럼
     // 메서드 체이닝 되게 만들 수 있는지
+
+    // 선택한 객체를 첫번째 인덱스로 옮기고 나머지 삭제 후 객체 리턴
+    this[0] = this[p_index];   
+    for(var i=1; i<this.length; i++){
+        delete this[i];
+    }
+    this.length = 1; 
+
     return this;
 }
 
@@ -39,7 +48,6 @@ $.fn.html = function(p_arg){
     }
 
     if(typeof(p_arg) == "function"){        // 유연하게쓰기
-        console.log("선언:",this);
         for(var i=0; i<this.length; i++){
             this[i].innerHTML = p_arg.call(this[i],i,this[i].innerHTML);
         }
@@ -75,6 +83,7 @@ $.fn.attr = function(p_arg1, p_arg2){   // 읽기
         return this;     // 메서드 체이닝 구현
     } 
 }   
+
 // jQuery val() 메서드처럼 동작하도록 만들어보기.
 // html() 메서드 참고하고 이해하면서
 // val() 메서드는 value속성을 편하게 취급하기 위한 메서드
@@ -119,3 +128,30 @@ $.fn.empty = function(){
     }
     return this;    // 메서드 체이닝
 }
+
+$.fn.css = function(p_arg1, p_arg2){
+    if(typeof(p_arg1) == "string" && !p_arg2){
+        return this[0].style[p_arg1];
+    }
+
+    if(typeof(p_arg1) == "string" && typeof(p_arg2) == "string"){
+        for(var i=0; i<this.length; i++){
+            this[i].style[p_arg1] = p_arg2;
+        }
+        return this;    // 메서드 체이닝
+    }
+
+    if(typeof(p_arg1) == "string" && typeof(p_arg2) == "function"){
+        for(var i=0; i<this.length; i++){
+            this[i].style[p_arg1] = p_arg2.call(this[i],i,this[i].style[p_arg1]);
+        }
+        return this;
+    }
+}
+// jQuery 메소드의 사용법에 일관된 패턴이 있음을 느끼는게 목적
+// 읽기, 전부쓰기, 선택적 쓰기
+
+$.fn.end = function(){
+    return $(this.origin);
+}
+

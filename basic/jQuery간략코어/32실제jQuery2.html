@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+</head>
+<body>
+    <div data-num="n5">맨날 div1</div>    
+    <div data-num="n8">맨날 div2</div>    
+    <div data-num="n9">맨널 div3</div>    
+    <div data-num="n7">맨날 div4</div>    
+    <input type="text" name="n_txt" value="aaa">
+    <input type="text" name="n_txt" value="roze">
+    <input type="text" name="n_txt" value="aaa">
+    <input type="text" name="n_txt" value="roze">
+<script>
+
+    console.log($("div").attr("data-num"));
+
+    // div 태그 중에서 속성 data-num 값이 n홀수 인 것만
+    // 테두리 border를 맘대로 만들기
+
+    var $divs = $("div");
+    $divs.attr("data-num",function(p_inx, p_val){
+        if(p_val.substring(1) % 2){
+            $(this).css("border","3px solid blue")
+                    .css("border-radius","50%")
+                    .css("font-size","4em");
+        }
+        return p_val;
+    });
+
+
+    // div태그 innerHTML에 문자열 "맨날"이 있는 것만
+    // 글자색 노랑, 배경색 검정, font-size 4배로 바꾸기
+    // var $divs = $("div");
+    // $divs.html(function(p_inx,p_html){
+    //     if(p_html.indexOf("맨날") != -1){
+    //         $(this).css("color","yellow")
+    //             .css("backgroundColor","black")
+    //             .css("font-size","4em");
+    //     }
+    //     return p_html;
+    // });
+
+    // input 태그중에 value값이 roze인 것만 속성 type을 radio로 변경
+    // text.attr -> val로 접근 == text.val -> attr로 접근
+    // var $text = $("input");
+    // $text.attr("type", function(p_inx, p_val){
+    //     // if(this.value == "roze"){   // 
+    //     console.log($(this));
+    //     if($(this).val() == "roze"){   
+    //         return "radio";
+    //     }
+    //     return p_val;
+    // })
+
+    // name="n_txt" 텍스트박스에 "맨날 div2"가 들어가도록 작성하시오
+    // var $text = $("input");
+    // var $divs = $("div");
+    // $text.val($divs.eq(1).html());
+    
+
+    // 여기서 html 메서드 억지 문제
+    // 맨날 div1과 맨날 div4만 html메소드를 이용해서 
+    // 맨날 로제로 변경
+
+    // var $divs = $("div");
+    // $divs.html(function(p_inx, p_val){
+    //     if(p_inx % 3 == 0 ){
+    //         return "맨날 맨날 로제";
+    //     }
+    //     return p_val;
+    // })
+</script>
+</body>
+</html>

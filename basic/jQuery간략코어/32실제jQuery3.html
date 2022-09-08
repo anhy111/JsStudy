@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+<style>
+    .large{
+        font-size:10em;
+    }
+
+    .middle{
+        font-size: 2em;
+    }
+
+    .small{
+        font-size: 0.5em;
+        color: gray;
+        background-color: yellow;
+    }
+</style>
+</head>
+<body>
+    <div class="disp">이것은 디자이너들이 많이 쓰는 매서드 연기</div>
+    <input type="button" id="btn1" value="클래스추가">
+    <input type="button" id="btn2" value="클래스삭제">
+    <select id="sel">
+        <option value="bo">보</option>
+        <option value="suck">석</option>
+        <option value="bar">바</option>
+    </select>
+<script>
+
+    $("#sel").change(function(){
+        alert("현재 선택된 값은:" + $(this).val());
+    });
+
+    $("#sel").on("change",function(){
+        $("#btn1").val($(this).val());
+    })
+
+    // btn1에 이벤트를 추가하시오(jQuery)
+    // onclick = function(){}
+    $("#btn1").click(function(){  
+        $(".disp").addClass("small");
+    });
+
+    // Element.addEventListener("이벤트명",{})
+    $("#btn2").on("click",function(){
+        $(".disp").removeClass("small");
+    });
+
+</script>
+</body>
+</html>

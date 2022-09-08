@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+<!-- jQuery 설치는 아래 1줄로 끝, 가끔 면접에서 cdn이 뭐냐고 물어봄 -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+<!-- 아래 방식은 내 서버에 부하됨. cdn으로 제공되면
+         cdn방식을 사용하는 것이 좋음
+<script src="../jquery.min.js"></script>
+-->
+<script>
+    $(function(){
+        // 나쁜 사용방식(객체를 계속 생성함)
+        // $("div").html("메롱");  // innerHTML
+        // $("div").css("color","red");    // style객체를 다룸
+
+        // 조금 좋은 방식   -> 메서드 체이닝 활용(기본적인 활용법)
+        $("div").html("메롱").css("color","red");
+
+        // 좋은 방식 -> 변수로 받아두는 것(성능)
+        var v_divs = $("div");
+
+        // 가장 좋은 방식 -> 변수에 $를 사용해서 jQuery변수 강조(실수방지)
+        var $divs = $("div");   
+        $divs.html("메롱").css("color","red");
+    });
+</script>
+</head>
+<body>
+    <div>맨날 div1</div>
+    <div>맨날 div2</div>
+    <div>맨날 div3</div>
+    <div>맨날 div4</div>
+    <video src="../video/js1.mp4"></video>
+<script>
+    // 오늘은 jQuery 기본 메소드만 정리(꼭 외우기)
+    // 아래 둘다 같음
+    /*  
+    $(document).ready(function(){
+        alert("문서로딩 끝남");
+    });
+    */
+    /*  window.onload와 비슷하지만 실제로 DomContentLoaded이벤트 사용
+        문서 태그로딩만 끝나면 domcontentloaded 이벤트 발생
+        문서 태그 로딩 후 이미지로딩까지 끝나면 window.onload 이벤트 발생 */
+    $(function(){
+        alert("문서로딩 끝낫어요");
+    });
+    
+    window.onload = function(){
+        alert("누가 빠른가");
+    };
+    
+</script>
+</body>
+</html>
